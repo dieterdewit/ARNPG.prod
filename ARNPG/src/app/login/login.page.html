@@ -1,0 +1,45 @@
+
+<ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <div text-center>
+          <h4>Iniciar Sesión</h4>
+              </div>
+              
+        <form class="form" [formGroup]="validations_form"  (ngSubmit)="loginUser(validations_form.value)">
+  
+                      <ion-item>
+                        <ion-label  position="floating" color="primary">Email</ion-label>
+                        <ion-input type="text" formControlName="email"></ion-input>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.email">
+                          <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                  
+                      <ion-item> 
+                        <ion-label  position="floating" color="primary">Contraseña</ion-label>
+                        <ion-input type="password" formControlName="password" class="form-controll" (keyup.enter)="loginUser(validations_form.value)" required></ion-input>
+                      </ion-item>
+                      <div class="validation-errors">
+                        <ng-container *ngFor="let validation of validation_messages.password">
+                          <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+                            {{ validation.message }}
+                          </div>
+                        </ng-container>
+                      </div>
+                  
+                      <ion-button  expand="block" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Ingresar</ion-button>
+                  
+                      <label class="error-message">{{errorMessage}}</label>
+              </form>
+              <p class="go-to-register">
+                      Sin usuario? <a (click)="goToRegisterPage()">Crear un usuario.</a>
+              </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
