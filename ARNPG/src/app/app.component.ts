@@ -21,13 +21,8 @@ export class AppComponent {
       icon: 'bug'
     },
     {
-      title: 'Ingresar Especie',
-      url: '/ingresar-especie',
-      icon: 'create'
-    },
-    {
-      title: 'Actualizar Especie',
-      url: '/actualizar-especie',
+      title: 'Gestionar Especie',
+      url: '/gestionar-especie',
       icon: 'hammer'
     }
   ];

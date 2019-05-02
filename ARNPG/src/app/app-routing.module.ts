@@ -23,14 +23,9 @@ const routes: Routes = [
     loadChildren: './especie/especie.module#EspeciePageModule' 
   },
   { 
-    path: 'ingresar-especie', 
-    loadChildren: './ingresar-especie/ingresar-especie.module#IngresarEspeciePageModule' 
+    path: 'gestionar-especies', 
+    loadChildren: './gestionar-especies/gestionar-especies.module#GestionarEspeciesPageModule' 
   },
-  { 
-    path: 'actualizar-especie', 
-    loadChildren: './actualizar-especie/actualizar-especie.module#ActualizarEspeciePageModule' 
-  },
-
 ];
 
 @NgModule({

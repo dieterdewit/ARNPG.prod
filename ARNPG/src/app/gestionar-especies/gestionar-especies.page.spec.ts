@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IngresarEspeciePage } from './ingresar-especie.page';
+import { GestionarEspeciesPage } from './gestionar-especies.page';
 
-describe('IngresarEspeciePage', () => {
-  let component: IngresarEspeciePage;
-  let fixture: ComponentFixture<IngresarEspeciePage>;
+describe('GestionarEspeciesPage', () => {
+  let component: GestionarEspeciesPage;
+  let fixture: ComponentFixture<GestionarEspeciesPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IngresarEspeciePage ],
+      declarations: [ GestionarEspeciesPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IngresarEspeciePage);
+    fixture = TestBed.createComponent(GestionarEspeciesPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
