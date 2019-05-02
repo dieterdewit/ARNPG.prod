@@ -3,15 +3,33 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   //{ path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
-  { path: 'menu', loadChildren: './menu/menu.module#MenuPageModule'},
+  { 
+    path: '', 
+    loadChildren: './login/login.module#LoginPageModule' 
+  },
+  { 
+    path: 'register', 
+    loadChildren: './register/register.module#RegisterPageModule' 
+  },
+  { 
+    path: 'dashboard', 
+    loadChildren: './dashboard/dashboard.module#DashboardPageModule' 
+  },
+  //{ path: 'menu', loadChildren: './menu/menu.module#MenuPageModule'},
 
-  { path: '', loadChildren: './menu/menu.module#MenuPageModule'},
-  { path: 'especie', loadChildren: './especie/especie.module#EspeciePageModule' },
-  { path: 'ingresar-especie', loadChildren: './ingresar-especie/ingresar-especie.module#IngresarEspeciePageModule' },
-  { path: 'actualizar-especie', loadChildren: './actualizar-especie/actualizar-especie.module#ActualizarEspeciePageModule' },
+  //{ path: '', loadChildren: './menu/menu.module#MenuPageModule'},
+  { 
+    path: 'especie', 
+    loadChildren: './especie/especie.module#EspeciePageModule' 
+  },
+  { 
+    path: 'ingresar-especie', 
+    loadChildren: './ingresar-especie/ingresar-especie.module#IngresarEspeciePageModule' 
+  },
+  { 
+    path: 'actualizar-especie', 
+    loadChildren: './actualizar-especie/actualizar-especie.module#ActualizarEspeciePageModule' 
+  },
 
 ];
 
