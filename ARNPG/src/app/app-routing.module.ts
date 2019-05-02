@@ -5,6 +5,10 @@ const routes: Routes = [
   //{ path: '', redirectTo: 'home', pathMatch: 'full' },
   { 
     path: '', 
+    loadChildren: './dashboard/dashboard.module#DashboardPageModule' 
+  },
+  { 
+    path: 'login', 
     loadChildren: './login/login.module#LoginPageModule' 
   },
   { 

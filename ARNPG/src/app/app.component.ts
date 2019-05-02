@@ -24,6 +24,11 @@ export class AppComponent {
       title: 'Gestionar Especie',
       url: '/gestionar-especie',
       icon: 'hammer'
+    },
+    {
+      title: 'Iniciar Sesion',
+      url: '/login',
+      icon: 'log-in'
     }
   ];
   constructor(
