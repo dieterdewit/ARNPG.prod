@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 import { AuthenticateService } from './services/authentication.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import * as firebase from 'firebase';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -25,6 +27,8 @@ firebase.initializeApp(environment.firebase);
     IonicModule.forRoot(), 
     AppRoutingModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     ReactiveFormsModule
   ],
   providers: [
