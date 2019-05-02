@@ -18,17 +18,17 @@ export class AppComponent {
     {
       title: 'Especie',
       url: '/especie',
-      icon: 'especie'
+      icon: 'bug'
     },
     {
       title: 'Ingresar Especie',
       url: '/ingresar-especie',
-      icon: 'ingresar-especie'
+      icon: 'create'
     },
     {
       title: 'Actualizar Especie',
       url: '/actualizar-especie',
-      icon: 'actualizar-especie'
+      icon: 'hammer'
     }
   ];
   constructor(
