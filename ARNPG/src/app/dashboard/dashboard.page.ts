@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { AuthenticateService } from '../services/authentication.service';
 
+import { CrudespeciesService } from '../services/crudespecies.service';
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
@@ -14,8 +17,13 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private authService: AuthenticateService
+    private authService: AuthenticateService,
+    private crudEspeciesService: CrudespeciesService
   ) {}
+
+  resolve() {
+    return this.crudEspeciesService.getEspecies();
+  }
 
   ngOnInit(){
     

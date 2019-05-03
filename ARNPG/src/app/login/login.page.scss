@@ -6,6 +6,10 @@ app-login {
 $white-color: #fff;
 $height100: 100%;
 
+ion-body {
+    background: #dfdfdf;
+}
+
 ion-grid {
     width:100%;
     height: $height100;
@@ -17,7 +21,7 @@ ion-row {
 }
 
 ion-col {
-    border: 1px solid #488aff;
+    border: 1px solid #48ff57;
     background: $white-color;
 }
 

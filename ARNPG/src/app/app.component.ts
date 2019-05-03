@@ -21,8 +21,8 @@ export class AppComponent {
       icon: 'bug'
     },
     {
-      title: 'Gestionar Especie',
-      url: '/gestionar-especie',
+      title: 'Gestionar Especies',
+      url: '/gestionar-especies',
       icon: 'hammer'
     },
     {

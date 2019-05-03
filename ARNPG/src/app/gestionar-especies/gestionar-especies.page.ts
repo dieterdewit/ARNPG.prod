@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CrudespeciesService } from '../services/crudespecies.service';
+import { AuthenticateService } from '../services/authentication.service';
+import { NavController } from '@ionic/angular';
+
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+import { validateEventsArray } from '@angular/fire/firestore';
 
 
 @Component({
@@ -10,119 +19,114 @@ import { CrudespeciesService } from '../services/crudespecies.service';
 })
 export class GestionarEspeciesPage implements OnInit {
 
-  especies: any;
-  especieFamilia: string;
-  especieOrden: string;
-  especieEspecie: string;
-  especieNombre: string;
-  especieCites: string;
-  especieLea: string;
-  especieUicn: string;
-  especieDistEstacional: string;
-  especieDescripcion: string;
-  especieEcologia: string;
-  especieHabitat: string;
-  especieDistribucion: [];
+  userEmail: string;
+
+  validations_form: FormGroup;
+  image: any;
 
 
-  constructor(private crudService: CrudespeciesService) { }
+  constructor(
+    private imagePicker: ImagePicker,
+    public toastCtrl:ToastController,
+    public loadingCtrl: LoadingController,
+    public router: Router,
+    private formmBuilder: FormBuilder,
+    private webview: WebView,
+    private navCtrl: NavController,
+    private crudService: CrudespeciesService,
+    private authService: AuthenticateService
+    ) { }
 
   ngOnInit() {
-    this.crudService.read_especie().subscribe(data => {
 
-      this.especies = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          isEdit: false,
-          familia: e.payload.doc.data()['familia'],
-          orden: e.payload.doc.data()['orden'],
-          especie: e.payload.doc.data()['especie'],
-          nombre: e.payload.doc.data()['nombre'],
-          cites: e.payload.doc.data()['cites'],
-          lea: e.payload.doc.data()['lea'],
-          uicn: e.payload.doc.data()['uicn'],
-          distEstacional: e.payload.doc.data()['distEstacional'],
-          descripcion: e.payload.doc.data()['descripcion'],
-          ecologia: e.payload.doc.data()['ecologia'],
-          habitat: e.payload.doc.data()['habitat'],
-          distribucion: e.payload.doc.data()['distribucion'],
-        };
-      })
-      console.log(this.especies);
+    if(this.authService.userDetails()){
+      this.userEmail = this.authService.userDetails().email;
+    }else{
+      this.navCtrl.navigateBack('');
+    }
 
+    this.resetFields();
+  }
+
+  resetFields(){
+    this.image = "./assets/imgs.deafault_image.jpg";
+    this.validations_form = this.formmBuilder.group({
+      title: new FormControl("", Validators.required),
+      description: new FormControl('', Validators.required)
     });
   }
 
-  CreateRecord() {
-    let record = {};
-    record['familia'] = this.especieFamilia;
-    record['orden'] = this.especieOrden;
-    record['especie'] = this.especieEspecie;
-    record['nombre'] = this.especieNombre;
-    record['cites'] = this.especieCites;
-    record['lea'] = this.especieLea;
-    record['uicn'] = this.especieUicn;
-    record['distEstacionl'] = this.especieDistEstacional;
-    record['descripcio '] = this.especieDescripcion;
-    record['ecologia'] = this.especieEcologia;
-    record['habitat'] = this.especieHabitat;
-    record['distribucion'] = this.especieDistribucion;
-    this.crudService.create_especie(record).then(resp => {
-      this.especieFamilia = "";
-      this.especieOrden = "";
-      this.especieEspecie = "";
-      this.especieNombre = "";
-      this.especieCites = "";
-      this.especieLea = "";
-      this.especieUicn = "";
-      this.especieDistEstacional = "";
-      this.especieDescripcion = "";
-      this.especieEcologia = "";
-      this.especieHabitat = "";
-      this.especieDistribucion = [];
-      console.log(resp);
+  onSubmit(value){
+    let data = {
+      familia: value.familia,
+      orden: value.orden,
+      especie: value.especie,
+      nombre: value.nombre,
+      cites: value.cites,
+      lea: value.lea,
+      uicn: value.uicn,
+      distEstacional: value.distEstacional,
+      descripcion: value.descripcion,
+      ecologia: value.ecologia,
+      habitat: value.habitat,
+      distribucion: value.distribucion
+    }
+    this.crudService.createEspecie(data)
+    .then(
+      res => {
+        this.router.navigate(["/dashboard"]);
+      }
+    )
+  }
+
+  openImagePicker(){
+    this.imagePicker.hasReadPermission()
+    .then((result) => {
+      if(result == false){
+        // no callbacks required as this opens a popup which returns async
+        this.imagePicker.requestReadPermission();
+      }
+      else if(result == true){
+        this.imagePicker.getPictures({
+          maximumImagesCount: 1
+        }).then(
+          (results) => {
+            for (var i = 0; i < results.length; i++) {
+              this.uploadImageToFirebase(results[i]);
+            }
+          }, (err) => console.log(err)
+        );
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  async uploadImageToFirebase(image){
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...'
+    });
+    const toast = await this.toastCtrl.create({
+      message: 'Image was updated successfully',
+      duration: 3000
+    });
+    this.presentLoading(loading);
+    let image_src = this.webview.convertFileSrc(image);
+    let randomId = Math.random().toString(36).substr(2, 5);
+
+    //uploads img to firebase storage
+    this.crudService.uploadImage(image_src, randomId)
+    .then(photoURL => {
+      this.image = photoURL;
+      loading.dismiss();
+      toast.present();
+    }, err =>{
+      console.log(err);
     })
-      .catch(error => {
-        console.log(error);
-      });
   }
 
-  RemoveRecord(rowID) {
-    this.crudService.delete_especie(rowID);
-  }
-
-  EditRecord(record) {
-    record.isEdit = true;
-    record.EditFamilia = record.Familia ;
-    record.EditOrden = record.Orden;
-    record.EditEspecie = record.Especie;
-    record.EditNombre = record.Nombre;
-    record.EditCites = record.Cites;
-    record.EditLea = record.Lea;
-    record.EditUicn = record.Uicn;
-    record.EditDistEstacional = record.DistEstacional;
-    record.EditDescripcion = record.Descripcion;
-    record.EditEcologia = record.Ecologia;
-    record.EditHabitat = record.Habitat;
-    record.EditDistribucion = record.Distribucion;
-  }
-
-  UpdateRecord(recordRow) {
-    let record = {};
-    record['familia'] = recordRow.EditFamilia;
-    record['orden'] = recordRow.EditOrden;
-    record['especie'] = recordRow.EditEspecie;
-    record['nombre'] = recordRow.EditNombre;
-    record['cites'] = recordRow.EditCites;
-    record['lea'] = recordRow.EditLea;
-    record['uicn'] = recordRow.EditUicn;
-    record['distEstacionl'] = recordRow.EditDistEstacional;
-    record['descripcio '] = recordRow.EditDescripcion;
-    record['ecologia'] = recordRow.EditEcologia;
-    record['habitat'] = recordRow.EditHabitat;
-    record['distribucion'] = recordRow.EditDistribucion;
-    this.crudService.update_especie(recordRow.id, record);
-    recordRow.isEdit = false;
+  async presentLoading(loading) {
+    return await loading.present();
   }
 
 }
