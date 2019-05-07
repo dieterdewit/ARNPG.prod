@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, ActivatedRoute } from "@angular/router
 import { CrudespeciesService } from '../services/crudespecies.service';
 
 @Injectable()
-export class DetailsResolver implements Resolve<any> {
+export class ActualizarEspecieResolver implements Resolve<any> {
 
   constructor(public crudService: CrudespeciesService,) { }
 

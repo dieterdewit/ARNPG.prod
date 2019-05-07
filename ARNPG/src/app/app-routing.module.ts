@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: './ingresar-especie/ingresar-especie.module#IngresarEspeciePageModule' 
   },
   { 
-    path: 'actualizar-especie', 
+    path: 'actualizar-especie/:id', 
     loadChildren: './actualizar-especie/actualizar-especie.module#ActualizarEspeciePageModule' 
   },
 

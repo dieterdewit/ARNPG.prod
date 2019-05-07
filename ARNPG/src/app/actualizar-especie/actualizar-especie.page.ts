@@ -41,11 +41,13 @@ export class ActualizarEspeciePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.authService.userDetails()){
-      this.userEmail = this.authService.userDetails().email;
-    }else{
-      this.navCtrl.navigateBack('');
-    }
+    //if(this.authService.userDetails()){
+    //  this.userEmail = this.authService.userDetails().email;
+    //}else{
+    //  this.navCtrl.navigateBack('');
+    //}
+    this.getData();
+    this.image = this.item.imagen;
   }
 
   getData(){

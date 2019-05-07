@@ -22,7 +22,9 @@
             <ion-card-title>{{item.payload.doc.data().nombre}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>{{item.payload.doc.data().descripcion}}</ion-card-content>
-          <ion-button fill="clear" slot="end">Más Información</ion-button>
+          <ion-button fill="clear" slot="end" [routerLink]="['/especie', item.payload.doc.id]">
+            Más Información
+          </ion-button>
         </ion-card>
       </div>
       <div *ngIf="items.length ==0 " class="empty-list">

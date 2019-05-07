@@ -6,11 +6,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ActualizarEspeciePage } from './actualizar-especie.page';
+import { ActualizarEspecieResolver } from './actualizar-especie.resolver'
+import { EspecieResolver } from '../especie/especie.resolver';
 
 const routes: Routes = [
   {
     path: '',
-    component: ActualizarEspeciePage
+    component: ActualizarEspeciePage,
+    resolve: {
+      data: ActualizarEspecieResolver
+    }
   }
 ];
 
@@ -22,6 +27,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ActualizarEspeciePage]
+  declarations: [ActualizarEspeciePage],
+  providers: [ActualizarEspecieResolver]
 })
 export class ActualizarEspeciePageModule {}

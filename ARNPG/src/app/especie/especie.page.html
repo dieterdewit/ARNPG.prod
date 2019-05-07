@@ -17,6 +17,9 @@
       <ion-card-title>{{item.nombre}}</ion-card-title>
     </ion-card-header>
     <ion-card-content>{{item.descripcion}}</ion-card-content>
+    <ion-button fill="clear" slot="end" [routerLink]="['/actualizar-especie', item.id]">
+      Actualizar
+    </ion-button>
   </ion-card>
 
    
