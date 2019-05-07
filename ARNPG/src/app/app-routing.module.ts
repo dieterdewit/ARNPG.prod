@@ -23,7 +23,7 @@ const routes: Routes = [
 
   //{ path: '', loadChildren: './menu/menu.module#MenuPageModule'},
   { 
-    path: 'especie', 
+    path: 'especie/:id', 
     loadChildren: './especie/especie.module#EspeciePageModule' 
   },
   { 

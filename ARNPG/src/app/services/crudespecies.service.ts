@@ -25,7 +25,7 @@ export class CrudespeciesService {
 
   getEspecie(especieId){
     return new Promise<any>((resolve, reject) => {
-      this.snapshotChangesSubscription = this.afs.doc<any>('especies/' + especieId).valueChanges()
+      this.snapshotChangesSubscription = this.afs.collection('especies').doc(especieId).valueChanges()
       .subscribe(snapshots => {
         resolve(snapshots);
       }, err => {

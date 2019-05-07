@@ -1,11 +1,24 @@
 <ion-header>
   <ion-toolbar color="succes" class="ios ion-color ion-color-success hydrated">
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    
     <ion-title>Especie</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-card>
+    <ion-img src={{item.imagen}}></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
+      <ion-card-title>{{item.nombre}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>{{item.descripcion}}</ion-card-content>
+  </ion-card>
+
+   
 </ion-content>
+
