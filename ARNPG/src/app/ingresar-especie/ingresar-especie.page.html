@@ -3,10 +3,42 @@
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-    <ion-title>ingresar_especie</ion-title>
+    <ion-title>Ingresar especie</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content padding>
+<ion-card>
+  <div>
+    <ion-row no padding>
+      <ion-col size="6" offset="3">
+        <img [src]="image" alt="this is the image"/>
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding>
+      <ion-col size="6" offset="3">
+        <ion-button  expand="block" size="small" (click)="openImagePicker()">Cambiar Imagen</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+    <ion-item>
+      <ion-label position="floating" color="primary">Familia</ion-label>
+      <ion-input type="text" formControlName="familia"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Orden</ion-label>
+      <ion-input type="text" formControlName="orden"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Agregar Especie</ion-button>
+
+    
+  </form>
+
+</ion-card>
 </ion-content>
+
+

@@ -10,27 +10,39 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 import { AuthenticateService } from './services/authentication.service';
+
+//firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import * as firebase from 'firebase';
-import { ReactiveFormsModule } from '@angular/forms';
-
-firebase.initializeApp(environment.firebase);
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
+    FormsModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
     ReactiveFormsModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AuthenticateService,
+    ImagePicker,
+    WebView,
+    { provide: FirestoreSettingsToken, useValue: {}},
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

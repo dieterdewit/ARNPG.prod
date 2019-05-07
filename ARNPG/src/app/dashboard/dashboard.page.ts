@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from '@ionic/angular';
 import { AuthenticateService } from '../services/authentication.service';
+import { LoadingController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,21 +12,41 @@ import { AuthenticateService } from '../services/authentication.service';
 })
 export class DashboardPage implements OnInit {
 
+  items: Array<any>;
+
 
   userEmail: string;
 
   constructor(
     private navCtrl: NavController,
-    private authService: AuthenticateService
+    private authService: AuthenticateService,
+    public loadingCtrl: LoadingController,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(){
-    
-    if(this.authService.userDetails()){
-      this.userEmail = this.authService.userDetails().email;
-    }else{
-      this.navCtrl.navigateBack('');
+    if (this.route && this.route.data) {
+      this.getData();
     }
+  }
+
+  async getData(){
+    //const loading = await this.loadingCtrl.create({
+      //message: 'Please wait...'
+    //});
+    //this.presentLoading(loading);
+
+    this.route.data.subscribe(routeData => {
+      routeData['data'].subscribe(data => {
+        //loading.dismiss();
+        this.items = data;
+      })
+    })
+  }
+
+  async presentLoading(loading) {
+    return await loading.present();
   }
 
   logout(){

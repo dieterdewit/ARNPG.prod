@@ -29,6 +29,11 @@ export class AppComponent {
       title: 'Actualizar Especie',
       url: '/actualizar-especie',
       icon: 'hammer'
+    },
+    {
+      title: 'Iniciar Sesión',
+      url: '/login',
+      icon: 'log-in'
     }
   ];
   constructor(

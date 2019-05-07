@@ -1,6 +1,8 @@
 {
   "name": "ARNPG",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "5eec5575"
 }
