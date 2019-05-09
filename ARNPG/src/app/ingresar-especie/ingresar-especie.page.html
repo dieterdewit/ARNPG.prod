@@ -13,12 +13,12 @@
   <div>
     <ion-row no padding>
       <ion-col size="6" offset="3">
-        <img [src]="image" alt="this is the image"/>
+        <img [src]="image" alt="No hay imagen seleccionada"/>
       </ion-col>
     </ion-row>
-    <ion-row no-padding>
+    <ion-row>
       <ion-col size="6" offset="3">
-        <ion-button  expand="block" size="small" (click)="openImagePicker()">Cambiar Imagen</ion-button>
+        <ion-button fill="outline" expand="block" size="small" (click)="openImagePicker()">Agregar Imagen</ion-button>
       </ion-col>
     </ion-row>
   </div>
@@ -31,6 +31,46 @@
     <ion-item>
       <ion-label position="floating" color="primary">Orden</ion-label>
       <ion-input type="text" formControlName="orden"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Especie</ion-label>
+      <ion-input type="text" formControlName="especie"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Nombre</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">CITES</ion-label>
+      <ion-input type="text" formControlName="cites"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">LEA</ion-label>
+      <ion-input type="text" formControlName="lea"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">UICN</ion-label>
+      <ion-input type="text" formControlName="uicn"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Distribución estacional</ion-label>
+      <ion-input type="text" formControlName="distEstacional"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Descripción</ion-label>
+      <ion-input type="text" formControlName="descripcion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Ecología</ion-label>
+      <ion-input type="text" formControlName="ecologia"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Hábitat</ion-label>
+      <ion-input type="text" formControlName="habitat"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Distribución</ion-label>
+      <ion-input type="text" formControlName="distribucion"></ion-input>
     </ion-item>
 
     <ion-button expand="block" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Agregar Especie</ion-button>

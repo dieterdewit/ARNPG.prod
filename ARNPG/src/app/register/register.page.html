@@ -1,3 +1,12 @@
+<ion-header>
+  <ion-toolbar color="succes shade" class="ios ion-color ion-color-success hydrated">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 
 <ion-grid>
     <ion-row justify-content-center>
@@ -8,8 +17,9 @@
               
         <form class="form" [formGroup]="validations_form"  (ngSubmit)="tryRegister(validations_form.value)">
   
+                      
                       <ion-item>
-                        <ion-label  position="floating" color="primary">Email</ion-label>
+                        <ion-label  position="floating" color="primary">E-mail</ion-label>
                         <ion-input type="text" formControlName="email"></ion-input>
                       </ion-item>
                       <div class="validation-errors">
@@ -52,7 +62,7 @@
                       <label class="error-message">{{errorMessage}}</label>
               </form>
               <p class="go-to-register">
-                      Con usuario? <a (click)="goLoginPage()">Iniciar sesión.</a>
+                      ¿Con usuario? <a (click)="goLoginPage()">Inicia sesión.</a>
               </p>
       </ion-col>
     </ion-row>
