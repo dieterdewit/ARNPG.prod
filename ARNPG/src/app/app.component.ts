@@ -23,12 +23,12 @@ export class AppComponent {
     {
       title: 'Ingresar especie',
       url: '/ingresar-especie',
-      icon: 'create'
+      icon: 'add-circle'
     },
     {
       title: 'Actualizar especie',
       url: '/actualizar-especie',
-      icon: 'hammer'
+      icon: 'create'
     },
     {
       title: 'Iniciar sesión',
