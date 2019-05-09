@@ -1,27 +1,57 @@
 <ion-header>
-  <ion-toolbar color="succes" class="ios ion-color ion-color-success hydrated">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
-    </ion-buttons>
-    
-    <ion-title>Especie</ion-title>
-
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-  <ion-card>
-    <ion-img src={{item.imagen}}></ion-img>
-    <ion-card-header>
-      <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
-      <ion-card-title>{{item.nombre}}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>{{item.descripcion}}</ion-card-content>
-    <ion-button fill="clear" slot="end" [routerLink]="['/actualizar-especie', item.id]">
-      Actualizar
-    </ion-button>
-  </ion-card>
-
-   
-</ion-content>
-
+    <ion-toolbar color="succes" class="ios ion-color ion-color-success hydrated">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
+      
+      <ion-title>Especie</ion-title>
+  
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{item.nombre}}</ion-card-title>
+        <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
+      </ion-card-header>
+      <ion-img class="ion-padding-horizontal" src={{item.imagen}}></ion-img>
+      <ion-card-content>
+        <ion-row>
+          <ion-col text-center>
+            <ion-img class="ion-padding" src="https://firebasestorage.googleapis.com/v0/b/arnpg-ad4d0.appspot.com/o/LC.png?alt=media&token=20124ae5-88e9-4fb1-a4b8-dbe0f8ce30b5"></ion-img>
+          </ion-col>
+          <ion-col text-center>
+            <ion-img class="ion-padding" src="https://firebasestorage.googleapis.com/v0/b/arnpg-ad4d0.appspot.com/o/X_Y.png?alt=media&token=0f5e7cc4-5394-47f8-9742-62c7fbcd477a"></ion-img>
+          </ion-col>
+          <ion-col text-center>
+            <ion-img class="ion-padding" src="https://firebasestorage.googleapis.com/v0/b/arnpg-ad4d0.appspot.com/o/X_G.png?alt=media&token=8e6d9878-3755-4661-9a46-8b4197dfc978"></ion-img>
+          </ion-col>
+          <ion-col text-center>
+            <ion-img class="ion-padding" src="https://firebasestorage.googleapis.com/v0/b/arnpg-ad4d0.appspot.com/o/R.png?alt=media&token=eb237876-3841-4e4e-a6d3-b1fd0c89227d"></ion-img>
+          </ion-col>
+        </ion-row>
+        <h2>Descripción</h2>
+        <p>{{item.descripcion}}</p>
+        <br>
+        <h2>Ecología</h2>
+        <p>{{item.ecologia}}</p>
+        <br>
+        <h2>Habitat</h2>
+        <p>{{item.habitat}}</p>
+        <br>
+        <h2>Distribución</h2>
+        <ul>
+          <li><p>{{item.distribucion[0]}}</p></li>
+          <li><p>{{item.distribucion[1]}}</p></li>
+        </ul>
+        <ion-button fill="clear" slot="end" [routerLink]="['/actualizar-especie', item.id]">
+          Actualizar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  
+     
+  </ion-content>
+  
+  
