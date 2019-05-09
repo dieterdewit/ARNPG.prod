@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar color="succes" class="ios ion-color ion-color-success hydrated">
+  <ion-toolbar color="succes shade" class="ios ion-color ion-color-success hydrated">
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-    <ion-title>Actualizar Especie</ion-title>
+    <ion-title>Actualizar especie</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -12,7 +12,7 @@
   <div>
     <ion-row>
       <ion-col size="6" offset="3">
-        <img [src]="image" alt="this is the image"/>
+        <img [src]="image" alt="No hay imagen seleccionada"/>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -70,7 +70,7 @@
       <ion-label position="floating" color="primary">Distribución</ion-label>
       <ion-input type="text" formControlName="distribucion"></ion-input>
     </ion-item>
-    <ion-button class="submit-button" expand="block" type="submit" [disabled]="!validations_form.valid">Guardar</ion-button>
+    <ion-button class="submit-button" expand="block" color="primary tint" type="submit" [disabled]="!validations_form.valid">Guardar</ion-button>
   </form>
   <ion-button class="delete-button" expand="block" color="danger" (click)="delete()">Eliminar</ion-button>
 </ion-card>
