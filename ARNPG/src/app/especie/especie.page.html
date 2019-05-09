@@ -27,7 +27,10 @@
         <p>{{item.habitat}}</p>
         <br>
         <h2>Distribución</h2>
-        <p>{{item.distribucion}}</p>
+        <ul>
+          <li><p>{{item.distribucion[0]}}</p></li>
+          <li><p>{{item.distribucion[1]}}</p></li>
+        </ul>
         <ion-button fill="clear" slot="end" [routerLink]="['/actualizar-especie', item.id]">
           Actualizar
         </ion-button>
