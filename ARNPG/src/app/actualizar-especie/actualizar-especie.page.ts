@@ -89,7 +89,7 @@ export class ActualizarEspeciePage implements OnInit {
       ecologia: value.ecologia,
       habitat: value.habitat,
       distribucion: value.distribucion,
-      image: this.image
+      imagen: this.image
     }
     this.crudService.updateEspecie(this.item.id,data)
     .then(

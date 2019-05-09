@@ -30,6 +30,46 @@
       <ion-label position="floating" color="primary">Orden</ion-label>
       <ion-input type="text" formControlName="orden"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Especie</ion-label>
+      <ion-input type="text" formControlName="especie"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Nombre</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">CITES</ion-label>
+      <ion-input type="text" formControlName="cites"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">LEA</ion-label>
+      <ion-input type="text" formControlName="lea"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">UICN</ion-label>
+      <ion-input type="text" formControlName="uicn"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Distribución estacional</ion-label>
+      <ion-input type="text" formControlName="distEstacional"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Descripción</ion-label>
+      <ion-input type="text" formControlName="descripcion"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Ecología</ion-label>
+      <ion-input type="text" formControlName="ecologia"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Hábitat</ion-label>
+      <ion-input type="text" formControlName="habitat"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" color="primary">Distribución</ion-label>
+      <ion-input type="text" formControlName="distribucion"></ion-input>
+    </ion-item>
     <ion-button class="submit-button" expand="block" type="submit" [disabled]="!validations_form.valid">Guardar</ion-button>
   </form>
   <ion-button class="delete-button" expand="block" color="danger" (click)="delete()">Eliminar</ion-button>
