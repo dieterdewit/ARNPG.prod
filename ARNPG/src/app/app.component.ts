@@ -16,22 +16,22 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Especie',
+      title: 'Especies',
       url: '/especie',
       icon: 'bug'
     },
     {
-      title: 'Ingresar Especie',
+      title: 'Ingresar especie',
       url: '/ingresar-especie',
       icon: 'create'
     },
     {
-      title: 'Actualizar Especie',
+      title: 'Actualizar especie',
       url: '/actualizar-especie',
       icon: 'hammer'
     },
     {
-      title: 'Iniciar Sesión',
+      title: 'Iniciar sesión',
       url: '/login',
       icon: 'log-in'
     }
