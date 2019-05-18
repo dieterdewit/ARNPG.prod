@@ -19,9 +19,6 @@ const routes: Routes = [
     path: 'dashboard', 
     loadChildren: './dashboard/dashboard.module#DashboardPageModule' 
   },
-  //{ path: 'menu', loadChildren: './menu/menu.module#MenuPageModule'},
-
-  //{ path: '', loadChildren: './menu/menu.module#MenuPageModule'},
   { 
     path: 'especie/:id', 
     loadChildren: './especie/especie.module#EspeciePageModule' 
@@ -33,6 +30,10 @@ const routes: Routes = [
   { 
     path: 'actualizar-especie/:id', 
     loadChildren: './actualizar-especie/actualizar-especie.module#ActualizarEspeciePageModule' 
+  },
+  { 
+    path: 'catalogo', 
+    loadChildren: './catalogo/catalogo.module#CatalogoPageModule' 
   },
 
 ];

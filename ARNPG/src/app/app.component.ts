@@ -16,7 +16,12 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Especies',
+      title: 'Catalogo de Especies',
+      url: '/catalogo',
+      icon: 'book'
+    },
+    {
+      title: 'Especie',
       url: '/especie',
       icon: 'bug'
     },

@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+
 import { NavController, ModalController } from '@ionic/angular';
-import { AuthenticateService } from '../services/authentication.service';
 import { LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.page.html',
-  styleUrls: ['./dashboard.page.scss'],
+  selector: 'app-catalogo',
+  templateUrl: './catalogo.page.html',
+  styleUrls: ['./catalogo.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class CatalogoPage implements OnInit {
 
   items: Array<any>;
 
+
+
   constructor(
     private navCtrl: NavController,
-    private authService: AuthenticateService,
     public loadingCtrl: LoadingController,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
-  ngOnInit(){
-    if (this.route && this.route.data) {
+  ngOnInit() {
+    if (this.route && this.route.data){
       this.getData();
     }
   }
@@ -33,10 +34,8 @@ export class DashboardPage implements OnInit {
       //message: 'Please wait...'
     //});
     //this.presentLoading(loading);
-
     this.route.data.subscribe(routeData => {
       routeData['data'].subscribe(data => {
-        //loading.dismiss();
         this.items = data;
       })
     })
@@ -46,14 +45,4 @@ export class DashboardPage implements OnInit {
     return await loading.present();
   }
 
-  logout(){
-    this.authService.logoutUser()
-    .then(res => {
-      console.log(res);
-      this.navCtrl.navigateBack('');
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }
 }
