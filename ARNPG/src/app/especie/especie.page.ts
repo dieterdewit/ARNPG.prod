@@ -46,6 +46,8 @@ export class EspeciePage implements OnInit {
         this.item.lea = "./assets/icon/3_G.png"
       }else if (this.item.lea == "X"){
         this.item.lea = "./assets/icon/X_G.png"
+      }else{
+        this.item.lea = "./assets/icon/-_G.png"
       }
 
       if(this.item.cites == "I"){
@@ -56,6 +58,8 @@ export class EspeciePage implements OnInit {
         this.item.cites = "./assets/icon/III_Y.png"
       }else if (this.item.cites == "X"){
         this.item.cites = "./assets/icon/X_Y.png"
+      }else{
+        this.item.cites = "./assets/icon/-_Y.png"
       }
 
       if(this.item.uicn == "LC"){
@@ -68,6 +72,8 @@ export class EspeciePage implements OnInit {
         this.item.uicn = "./assets/icon/CR.png"
       }else if (this.item.uicn == "DD"){
         this.item.uicn = "./assets/icon/DD.png"
+      }else{
+        this.item.uicn = "./assets/icon/-_R.png"
       }
 
       if(this.item.distEstacional == "R"){
@@ -78,6 +84,8 @@ export class EspeciePage implements OnInit {
         this.item.distEstacional = "./assets/icon/T.png"
       }else if (this.item.distEstacional == "ER"){
         this.item.distEstacional = "./assets/icon/ER.png"
+      }else{
+        this.item.distEstacional = "./assets/icon/-_P.png"
       }
     }
     })
