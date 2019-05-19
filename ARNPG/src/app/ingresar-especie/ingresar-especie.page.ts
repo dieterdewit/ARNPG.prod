@@ -131,5 +131,11 @@ export class IngresarEspeciePage implements OnInit {
   async presentLoading(loading) {
     return await loading.present();
   }
+  onFileSelected(event){
+    var Imagefile=event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = e => this.image = reader.result;
+    reader.readAsDataURL(Imagefile);
+  }
 
 }
