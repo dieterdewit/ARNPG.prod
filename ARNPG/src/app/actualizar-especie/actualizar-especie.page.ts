@@ -9,6 +9,7 @@ import { LoadingController, ToastController, AlertController, NavController } fr
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-actualizar-especie',
@@ -23,6 +24,7 @@ export class ActualizarEspeciePage implements OnInit {
   image: any;
   item: any;
   load: boolean = false;
+  fileToUp: File;
 
   constructor(
     private imagePicker: ImagePicker,
@@ -35,7 +37,8 @@ export class ActualizarEspeciePage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthenticateService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private storage: AngularFireStorage
 
 
   ) { }
@@ -76,27 +79,35 @@ export class ActualizarEspeciePage implements OnInit {
   }
 
   onSubmit(value){
-    let data = {
-      familia: value.familia,
-      orden: value.orden,
-      especie: value.especie,
-      nombre: value.nombre,
-      cites: value.cites,
-      lea: value.lea,
-      uicn: value.uicn,
-      distEstacional: value.distEstacional,
-      descripcion: value.descripcion,
-      ecologia: value.ecologia,
-      habitat: value.habitat,
-      distribucion: value.distribucion,
-      imagen: this.image
-    }
-    this.crudService.updateEspecie(this.item.id,data)
-    .then(
-      res => {
-        this.router.navigate(["/gestionar-especies"]);
-      }
-    )
+    let image_src = this.image;
+    let randomId = Math.random().toString(36).substr(2, 5);
+    //uploads img to firebase storage
+    this.storage.upload(randomId, this.fileToUp).then(rst => {
+      rst.ref.getDownloadURL().then(url => {
+        this.image=url.toString();
+        let data = {
+          familia: value.familia,
+          orden: value.orden,
+          especie: value.especie,
+          nombre: value.nombre,
+          cites: value.cites,
+          lea: value.lea,
+          uicn: value.uicn,
+          distEstacional: value.distEstacional,
+          descripcion: value.descripcion,
+          ecologia: value.ecologia,
+          habitat: value.habitat,
+          distribucion: value.distribucion,
+          imagen: this.image
+        }
+        this.crudService.updateEspecie(this.item.id,data)
+        .then(
+          res => {
+            this.router.navigate(["/dashboard"]);
+          }
+        )
+      })
+    });
   }
 
   async delete() {
@@ -175,6 +186,14 @@ export class ActualizarEspeciePage implements OnInit {
 
   async presentLoading(loading) {
     return await loading.present();
+  }
+
+  onFileSelected(event){
+    var Imagefile=event.target.files[0];
+    var reader = new FileReader();
+    this.fileToUp=Imagefile;
+    reader.onload = e => this.image = String(reader.result);
+    reader.readAsDataURL(Imagefile);
   }
 
 }

@@ -62,19 +62,12 @@ export class IngresarEspeciePage implements OnInit {
 
 
   onSubmit(value){
-    console.log(this.image);
-    console.log("Inicio de subida de imagen");
     let image_src = this.image;
     let randomId = Math.random().toString(36).substr(2, 5);
-    console.log(randomId);  
     //uploads img to firebase storage
     this.storage.upload(randomId, this.fileToUp).then(rst => {
       rst.ref.getDownloadURL().then(url => {
         this.image=url.toString();
-        console.log("URL");
-        console.log(url);
-        console.log("This Image");
-        console.log(this.image);
         let data = {
           familia: value.familia,
           orden: value.orden,
@@ -90,7 +83,6 @@ export class IngresarEspeciePage implements OnInit {
           distribucion: value.distribucion,
           imagen: this.image
         }
-        console.log(this.image);
         this.crudService.createEspecie(data)
         .then(
           res => {
