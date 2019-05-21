@@ -16,24 +16,14 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Catalogo de Especies',
+      title: 'Catálogo de especies',
       url: '/catalogo',
       icon: 'book'
-    },
-    {
-      title: 'Especie',
-      url: '/especie',
-      icon: 'bug'
     },
     {
       title: 'Ingresar especie',
       url: '/ingresar-especie',
       icon: 'add-circle'
-    },
-    {
-      title: 'Actualizar especie',
-      url: '/actualizar-especie',
-      icon: 'create'
     },
     {
       title: 'Iniciar sesión',
