@@ -11,8 +11,11 @@ import { Route } from '@angular/compiler/src/core';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-
-  items: Array<any>;
+  // Optional parameters to pass to the swiper instance. See http://idangero.us/swiper/api/ for valid options.
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
 
   constructor(
     private navCtrl: NavController,
@@ -24,23 +27,10 @@ export class DashboardPage implements OnInit {
 
   ngOnInit(){
     if (this.route && this.route.data) {
-      this.getData();
+      //this.getData();
     }
   }
 
-  async getData(){
-    //const loading = await this.loadingCtrl.create({
-      //message: 'Please wait...'
-    //});
-    //this.presentLoading(loading);
-
-    this.route.data.subscribe(routeData => {
-      routeData['data'].subscribe(data => {
-        //loading.dismiss();
-        this.items = data;
-      })
-    })
-  }
 
   async presentLoading(loading) {
     return await loading.present();
