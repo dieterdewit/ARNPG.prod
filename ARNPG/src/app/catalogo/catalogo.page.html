@@ -14,11 +14,11 @@
 </ion-header>
 
     <ion-content>
-        <ion-searchbar showCancelButton cancelButtonText="Custom Cancel" (ionInput)="filterList($event)"></ion-searchbar>
+        <ion-searchbar #searchControl showCancelButton cancelButtonText="Custom Cancel" (ionInput)="filterItems($event.target.value)"></ion-searchbar>
 
 
 
-      <ion-item *ngFor="let item of items" [routerLink]="['/especie', item.payload.doc.id]">
+      <ion-item *ngFor="let item of items" (click)='clearResults();' [routerLink]="['/especie', item.payload.doc.id]">
         <ion-thumbnail>
           <img src="{{item.payload.doc.data().imagen}}">
         </ion-thumbnail>

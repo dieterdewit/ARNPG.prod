@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, IonSearchbar } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
@@ -13,7 +13,10 @@ import {AngularFirestore} from '@angular/fire/firestore';
 })
 export class CatalogoPage implements OnInit {
 
+  @ViewChild('searchControl') searchControl: IonSearchbar;
+
   items: Array<any>;
+  allItems: Array<any>;
 
   public goalList: any[];
   public loadedGoalList: any[];
@@ -42,22 +45,27 @@ export class CatalogoPage implements OnInit {
     this.goalList = this.loadedGoalList;
     }
 
-    filterList(evt) {
-      this.initializeItems();
-      const searchTerm = evt.srcElement.value;
+  filterItems(param : any) : void
+  {
+      let val : string 	= param;
+      // DON'T filter the technologies IF the supplied input is an empty string
+      if (val.trim() !== '')
+      {
+        var array = [];
+        for (let item of this.allItems) {
+          if(item.payload.doc.data().nombre.toLowerCase().indexOf(val.toLowerCase()) > -1){
+            array.push(item)
+          }
+        }
+        this.items = array;
+      }else{
+        this.items = this.allItems
+      }
+  }
 
-      if (!searchTerm) {
-      return;
-      }
-      this.goalList = this.goalList.filter(currentGoal => {
-      if (currentGoal.goalName && searchTerm) {
-      if (currentGoal.goalName.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
-      return true;
-      }
-      return false;
-      }
-      });
-      }
+  clearResults() : void{
+    this.searchControl.value = '';
+  }
 
   async getData(){
     //const loading = await this.loadingCtrl.create({
@@ -67,6 +75,7 @@ export class CatalogoPage implements OnInit {
     this.route.data.subscribe(routeData => {
       routeData['data'].subscribe(data => {
         this.items = data;
+        this.allItems = this.items.slice(0);
       })
     })
   }
