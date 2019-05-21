@@ -18,7 +18,7 @@
     </ion-row>
     <ion-row>
       <ion-col size="6" offset="3">
-        <ion-button fill="outline" expand="block" size="small" (click)="openImagePicker()">Agregar Imagen</ion-button>
+        <ion-input type="file" accept=".jpg,.jpeg,.png" (change)="onFileSelected($event)"></ion-input>
       </ion-col>
     </ion-row>
   </div>
@@ -42,19 +42,44 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating" color="primary">CITES</ion-label>
-      <ion-input type="text" formControlName="cites"></ion-input>
+      <ion-select placeholder="Seleccione uno" formControlName="cites">
+        <ion-select-option value="I">I</ion-select-option>
+        <ion-select-option value="II">II</ion-select-option>
+        <ion-select-option value="III">III</ion-select-option>
+        <ion-select-option value="X">X</ion-select-option>
+        <ion-select-option value="-">-</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="floating" color="primary">LEA</ion-label>
-      <ion-input type="text" formControlName="lea"></ion-input>
+        <ion-label position="floating" color="primary">LEA</ion-label>
+        <ion-select placeholder="Seleccione uno" formControlName="lea">
+          <ion-select-option value="1">1</ion-select-option>
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="X">X</ion-select-option>
+          <ion-select-option value="-">-</ion-select-option>
+        </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="floating" color="primary">UICN</ion-label>
-      <ion-input type="text" formControlName="uicn"></ion-input>
+        <ion-label position="floating" color="primary">UICN</ion-label>
+        <ion-select placeholder="Seleccione uno" formControlName="uicn">
+          <ion-select-option value="LC">LC</ion-select-option>
+          <ion-select-option value="VU">VU</ion-select-option>
+          <ion-select-option value="EN">EN</ion-select-option>
+          <ion-select-option value="CR">CR</ion-select-option>
+          <ion-select-option value="DD">DD</ion-select-option>
+          <ion-select-option value="-">-</ion-select-option>
+        </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="floating" color="primary">Distribución estacional</ion-label>
-      <ion-input type="text" formControlName="distEstacional"></ion-input>
+        <ion-label position="floating" color="primary">Distribución Estacional</ion-label>
+        <ion-select placeholder="Seleccione uno" formControlName="distEstacional">
+          <ion-select-option value="R">R</ion-select-option>
+          <ion-select-option value="M">M</ion-select-option>
+          <ion-select-option value="T">T</ion-select-option>
+          <ion-select-option value="ER">ER</ion-select-option>
+          <ion-select-option value="-">-</ion-select-option>
+        </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="floating" color="primary">Descripción</ion-label>
