@@ -16,11 +16,6 @@
     <ion-content>
         <ion-searchbar showCancelButton cancelButtonText="Custom Cancel" (ionInput)="filterList($event)"></ion-searchbar>
 
-      <ion-list>
-        <ion-item *ngFor="let item of goalList">
-          <ion-label>{{item.goalName}}</ion-label>
-        </ion-item>
-      </ion-list>
 
 
       <ion-item *ngFor="let item of items" [routerLink]="['/especie', item.payload.doc.id]">
