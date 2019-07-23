@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudespeciesService } from '../services/crudespecies.service';
 import { AuthenticateService } from '../services/authentication.service';
 
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LoadingController, ToastController, AlertController, NavController } from '@ionic/angular';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
