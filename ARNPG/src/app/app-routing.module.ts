@@ -35,6 +35,8 @@ const routes: Routes = [
     path: 'catalogo', 
     loadChildren: './catalogo/catalogo.module#CatalogoPageModule' 
   },
+  { path: 'avistamientos', loadChildren: './avistamientos/avistamientos.module#AvistamientosPageModule' },
+  { path: 'notificar-avistamiento', loadChildren: './notificar-avistamiento/notificar-avistamiento.module#NotificarAvistamientoPageModule' },
 
 ];
 
