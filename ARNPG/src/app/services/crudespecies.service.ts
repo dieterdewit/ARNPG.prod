@@ -34,6 +34,32 @@ export class CrudespeciesService {
     });
   }
 
+  getAvistamientos(){
+    return new Promise<any>((resolve, reject) => {
+      this.snapshotChangesSubscription = this.afs.collection('avistamientos').snapshotChanges();
+      resolve(this.snapshotChangesSubscription);
+    })
+  }
+
+  createAvistamiento(value){
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('especies').add({
+        nombre: value.nombre,
+        fecha: value.fecha,
+        comentario: value.comentario,
+        especie: value.especie,
+        geolocalizacion: value.geolocalizacion,
+        lugar: value.lugar,
+        revisado: value.habitat,
+        multimedia: value.multimedia
+      })
+      .then(
+        res => resolve(res),
+        err => reject(err)
+      )
+    })
+  }
+
   unsubscribeOnLogOut(){
     //remember to unsubscribe from the snapshotChanges
     this.snapshotChangesSubscription.unsubscribe();
