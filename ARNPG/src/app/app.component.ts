@@ -26,6 +26,16 @@ export class AppComponent {
       icon: 'add-circle'
     },
     {
+      title: 'Notificar Avistamiento',
+      url: '/notificar-avistamiento',
+      icon: 'camera'
+    },
+    {
+      title: 'Avistamientos',
+      url: '/avistamientos',
+      icon: 'images'
+    },
+    {
       title: 'Iniciar sesión',
       url: '/login',
       icon: 'log-in'
