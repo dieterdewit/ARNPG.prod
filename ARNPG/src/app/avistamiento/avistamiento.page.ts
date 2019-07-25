@@ -30,7 +30,7 @@ export class AvistamientoPage implements OnInit {
 
   ngOnInit() {
     this.getData();
-    this.image = this.item.multimedia;
+    //this.image = this.item.multimedia;
   }
 
   getData(){
