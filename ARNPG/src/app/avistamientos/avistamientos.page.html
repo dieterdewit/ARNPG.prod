@@ -1,9 +1,24 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>avistamientos</ion-title>
+  <ion-toolbar color="succes" class="ios ion-color ion-color-success hydrated">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title>Avistamientos</ion-title>
+
+    <ion-buttons slot="primary">
+        <ion-button (click)="logout()"><ion-icon name="log-out"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar #searchControl showCancelButton cancelButtonText="Custom Cancel" (ionInput)="filterItems($event.target.value)"></ion-searchbar>
+    <ion-item *ngFor="let item of items" (click)='clearResults();' [routerLink]="['/especie', item.payload.doc.id]">
+      <ion-thumbnail>
+        <img src="{{item.payload.doc.data().multimedia}}">
+      </ion-thumbnail>
+    <ion-label>{{item.payload.doc.data().nombre}}</ion-label>
+  </ion-item>
 
 </ion-content>
