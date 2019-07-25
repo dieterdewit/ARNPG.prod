@@ -41,6 +41,17 @@ export class CrudespeciesService {
     })
   }
 
+  getAvistamiento(avistamientoId){
+    return new Promise<any>((resolve, reject) => {
+      this.snapshotChangesSubscription = this.afs.collection('avistamientos').doc(avistamientoId).valueChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots);
+      }, err => {
+        reject(err)
+      })
+    });
+  }
+
   createAvistamiento(value){
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('especies').add({

@@ -14,7 +14,7 @@
 
 <ion-content>
   <ion-searchbar #searchControl showCancelButton cancelButtonText="Custom Cancel" (ionInput)="filterItems($event.target.value)"></ion-searchbar>
-    <ion-item *ngFor="let item of items" (click)='clearResults();' [routerLink]="['/especie', item.payload.doc.id]">
+    <ion-item *ngFor="let item of items" (click)='clearResults();' [routerLink]="['/avistamiento', item.payload.doc.id]">
       <ion-thumbnail>
         <img src="{{item.payload.doc.data().multimedia}}">
       </ion-thumbnail>
