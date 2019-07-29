@@ -43,6 +43,8 @@ const routes: Routes = [
     path: 'notificar-avistamiento', 
     loadChildren: './notificar-avistamiento/notificar-avistamiento.module#NotificarAvistamientoPageModule' 
   },
+  { path: 'avistamiento/:id', 
+  loadChildren: './avistamiento/avistamiento.module#AvistamientoPageModule' },
 
 ];
 

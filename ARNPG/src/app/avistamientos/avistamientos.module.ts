@@ -6,11 +6,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AvistamientosPage } from './avistamientos.page';
+import { AvistamientosResolver} from "./avistamientos.resolver";
+
 
 const routes: Routes = [
   {
     path: '',
-    component: AvistamientosPage
+    component: AvistamientosPage,
+    resolve: {
+      data: AvistamientosResolver
+    }
   }
 ];
 
@@ -21,6 +26,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AvistamientosPage]
+  declarations: [AvistamientosPage],
+  providers: [
+    AvistamientosResolver
+  ]
 })
 export class AvistamientosPageModule {}
