@@ -1,57 +1,57 @@
 <ion-header>
-    <ion-toolbar color="succes" class="ios ion-color ion-color-success hydrated">
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref="home"></ion-back-button>
-      </ion-buttons>
-      
-      <ion-title>Especie</ion-title>
-  
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>{{item.nombre}}</ion-card-title>
-        <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
-      </ion-card-header>
-      <ion-img class="ion-padding-horizontal" src={{item.imagen}}></ion-img>
-      <ion-card-content>
-        <ion-row>
-          <ion-col text-center>
-            <ion-img class="ion-padding" src="{{item.uicn}}"></ion-img>
-          </ion-col>
-          <ion-col text-center>
-            <ion-img class="ion-padding" src="{{item.cites}}"></ion-img>
-          </ion-col>
-          <ion-col text-center>
-            <ion-img class="ion-padding" src="{{item.lea}}"></ion-img>
-          </ion-col>
-          <ion-col text-center>
-            <ion-img class="ion-padding" src="{{item.distEstacional}}"></ion-img>
-          </ion-col>
-        </ion-row>
-        <h2>Descripción</h2>
-        <p>{{item.descripcion}}</p>
-        <br>
-        <h2>Ecología</h2>
-        <p>{{item.ecologia}}</p>
-        <br>
-        <h2>Habitat</h2>
-        <p>{{item.habitat}}</p>
-        <br>
-        <h2>Distribución</h2>
-        <ul>
-          <li><p>{{item.distribucion[0]}}</p></li>
-          <li><p>{{item.distribucion[1]}}</p></li>
-        </ul>
-        <ion-button fill="clear" slot="end" [routerLink]="['/actualizar-especie', item.id]">
-          Actualizar
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
-  
-     
-  </ion-content>
-  
-  
+  <ion-toolbar color="succes" class="ios ion-color ion-color-success hydrated">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>Especie</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content padding>
+  <ion-card *ngIf="item">
+    <ion-card-header>
+      <ion-card-title>{{ item.nombre }}</ion-card-title>
+      <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
+    </ion-card-header>
+    <ion-img class="ion-padding-horizontal" src="{{item.imagen}}"></ion-img>
+    <ion-card-content>
+      <ion-row>
+        <ion-col text-center>
+          <ion-img class="ion-padding" src="item.uicn"></ion-img>
+        </ion-col>
+        <ion-col text-center>
+          <ion-img class="ion-padding" src="item.cites"></ion-img>
+        </ion-col>
+        <ion-col text-center>
+          <ion-img class="ion-padding" src="item.lea"></ion-img>
+        </ion-col>
+        <ion-col text-center>
+          <ion-img class="ion-padding" src="item.distEstacional"></ion-img>
+        </ion-col>
+      </ion-row>
+      <h2>Descripción</h2>
+      <p>{{item.descripcion}}</p>
+      <br>
+      <h2>Ecología</h2>
+      <p>{{item.ecologia}}</p>
+      <br>
+      <h2>Habitat</h2>
+      <p>{{item.habitat}}</p>
+      <br>
+      <h2>Distribución</h2>
+      <ul>
+        <li><p>{{item.distribucion[0]}}</p></li>
+        <li><p>{{item.distribucion[1]}}</p></li>
+      </ul>
+      <ion-button fill="clear" slot="end" [routerLink]="['/actualizar-especie', item.id]">
+        Actualizar
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+   
+</ion-content>

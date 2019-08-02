@@ -11,6 +11,8 @@ export class EspecieResolver implements Resolve<any> {
 
     return new Promise((resolve, reject) => {
       let itemId = route.paramMap.get('id');
+      console.log(itemId);
+      console.log(itemId)
       this.crudService.getEspecie(itemId)
       .then(data => {
         data.id = itemId;
