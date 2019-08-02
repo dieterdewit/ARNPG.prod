@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CrudespeciesService } from '../services/crudespecies.service';
 import { AuthenticateService } from '../services/authentication.service';
 
-import { Validators, FormBuilder, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { LoadingController, ToastController, AlertController, NavController } from '@ionic/angular';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
@@ -50,32 +50,40 @@ export class ActualizarEspeciePage implements OnInit {
     //  this.navCtrl.navigateBack('');
     //}
     this.getData();
-    this.image = this.item.imagen;
+    //this.image = this.item.imagen;
   }
 
   getData(){
     this.route.data.subscribe(routeData => {
      let data = routeData['data'];
+     console.log(data);
      if (data) {
        this.item = data;
+       console.log(this.item);
        this.image = this.item.image;
+       console.log(Object.keys(this.item));
+     
+      this.validations_form = this.formBuilder.group({
+        familia: new FormControl(this.item.familia, Validators.required),
+        orden: new FormControl(this.item.orden, Validators.required),
+        especie: new FormControl(this.item.especie, Validators.required),
+        nombre: new FormControl(this.item.nombre, Validators.required),
+        cites: new FormControl(this.item.cites, Validators.required),
+        lea: new FormControl(this.item.lea, Validators.required),
+        uicn: new FormControl(this.item.uicn, Validators.required),
+        distEstacional: new FormControl(this.item.distEstacional, Validators.required),
+        descripcion: new FormControl(this.item.descripcion, Validators.required),
+        ecologia: new FormControl(this.item.ecologia, Validators.required),
+        habitat: new FormControl(this.item.habitat, Validators.required),
+        distribucion: new FormControl(this.item.distribucion, Validators.required),
+    
+        });
+     }
+     else{
+       console.log("no data");
      }
     })
-    this.validations_form = this.formBuilder.group({
-      familia: new FormControl(this.item.familia, Validators.required),
-      orden: new FormControl(this.item.orden, Validators.required),
-      especie: new FormControl(this.item.especie, Validators.required),
-      nombre: new FormControl(this.item.nombre, Validators.required),
-      cites: new FormControl(this.item.cites, Validators.required),
-      lea: new FormControl(this.item.lea, Validators.required),
-      uicn: new FormControl(this.item.uicn, Validators.required),
-      distEstacional: new FormControl(this.item.distEstacional, Validators.required),
-      descripcion: new FormControl(this.item.descripcion, Validators.required),
-      ecologia: new FormControl(this.item.ecologia, Validators.required),
-      habitat: new FormControl(this.item.habitat, Validators.required),
-      distribucion: new FormControl(this.item.distribucion, Validators.required),
     
-    });
   }
 
   onSubmit(value){

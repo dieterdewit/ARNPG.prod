@@ -15,6 +15,7 @@ export class ActualizarEspecieResolver implements Resolve<any> {
       .then(data => {
         data.id = itemId;
         resolve(data);
+        console.log(data);
       }, err => {
         reject(err);
       })

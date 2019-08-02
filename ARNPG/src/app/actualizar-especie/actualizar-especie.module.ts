@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { ActualizarEspeciePage } from './actualizar-especie.page';
 import { ActualizarEspecieResolver } from './actualizar-especie.resolver'
-import { EspecieResolver } from '../especie/especie.resolver';
 
 const routes: Routes = [
   {
