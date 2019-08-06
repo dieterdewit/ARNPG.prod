@@ -1,9 +1,4 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>notificar-avistamiento</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-header>
   <ion-toolbar color="succes" class="ios ion-color ion-color-success hydrated">
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
@@ -12,6 +7,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-</ion-content>
+<ion-content padding>
+  <ion-card>
+    <div>
+      <ion-row no padding>
+        <ion-col size="6" offset="3">
+          <img [src]="image" alt="No hay imagen seleccionada"/>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" offset="3">
+          <ion-input type="file" accept=".jpg,.jpeg,.png" (change)="onFileSelected($event)"></ion-input>
+        </ion-col>
+      </ion-row>
+    </div>
+  
+    <form class="form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
+      <ion-item>
+        <ion-label position="floating" color="primary">Nombre</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Fecha</ion-label>
+        <ion-input type="text" formControlName="fecha"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Comentario</ion-label>
+        <ion-input type="text" formControlName="comentario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Especie</ion-label>
+        <ion-input type="text" formControlName="especie"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Geolocalización</ion-label>
+        <ion-input type="text" formControlName="geolocalizacion"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" color="primary">Lugar</ion-label>
+        <ion-input type="text" formControlName="lugar"></ion-input>
+      </ion-item>
+  
+      <ion-button expand="block" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Notificar Avistamiento</ion-button>
+  
+      
+    </form>
+  
+  </ion-card>
+  </ion-content>
