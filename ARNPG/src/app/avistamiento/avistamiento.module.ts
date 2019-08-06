@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { AvistamientoPage } from './avistamiento.page';
 import { AvistamientoResolver } from './avistamiento.resolver';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
   ],
   declarations: [AvistamientoPage],
   providers:[
-    AvistamientoResolver
+    AvistamientoResolver,
+    AngularFirestore
   ]
 })
 export class AvistamientoPageModule {}
