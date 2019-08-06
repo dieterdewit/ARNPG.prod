@@ -13,7 +13,7 @@ import { AuthenticateService } from './services/authentication.service';
 
 //firebase
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { AngularFirestoreModule, FirestoreSettingsToken, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
@@ -27,6 +27,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
   entryComponents: [],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
@@ -38,6 +39,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
   ],
   providers: [
     StatusBar,
+    AngularFirestore,
     SplashScreen,
     AuthenticateService,
     ImagePicker,
