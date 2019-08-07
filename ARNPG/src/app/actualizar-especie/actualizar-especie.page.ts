@@ -135,7 +135,7 @@ export class ActualizarEspeciePage implements OnInit {
             this.crudService.deleteEspecie(this.item.id)
             .then(
               res => {
-                this.router.navigate(["/gestionar-especies"]);
+                this.router.navigate(["/catalogo"]);
               },
               err => console.log(err)
             )

@@ -12,6 +12,11 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 ion-toolbar{
-    --background: #94d500;
-    //linear-gradient(to right,#64a70b ,#eaaa00 );
+    --background: linear-gradient(to right,#eaaa00 ,#fe5000 );
+}
+ion-toolbar > ion-title{
+    font-size: 35px;
+    //font-weight: bold;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    //color: rgb(80,80,80);
 }

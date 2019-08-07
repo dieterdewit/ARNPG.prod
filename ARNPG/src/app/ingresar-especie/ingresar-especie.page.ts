@@ -86,7 +86,7 @@ export class IngresarEspeciePage implements OnInit {
         this.crudService.createEspecie(data)
         .then(
           res => {
-            this.router.navigate(["/dashboard"]);
+            this.router.navigate(["/catalogo"]);
           }
         )
       })
