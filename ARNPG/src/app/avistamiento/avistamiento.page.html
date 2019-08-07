@@ -11,13 +11,13 @@
 
 
 
-<ion-content padding>
+<ion-content>
   <ion-card *ngIf="item">
     <ion-card-header>
       <ion-card-title>{{ item.nombre }}</ion-card-title>
       <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
     </ion-card-header>
-    <ion-img class="ion-padding-horizontal" src="{{item.multimedia}}"></ion-img>
+    <ion-img  src="{{item.multimedia}}"></ion-img>
     <ion-card-content>
       <h2>Comentario</h2>
       <p>{{item.comentario}}</p>
