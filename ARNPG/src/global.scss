@@ -15,12 +15,12 @@ ion-toolbar{
     --background: linear-gradient(to right,#eaaa00 ,#fe5000 );
 }
 ion-toolbar > ion-title{
-    font-size: 35px;
+    font-size: 25px;
     //font-weight: bold;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     //color: rgb(80,80,80);
 }
 
-ion-content{
-    background-image: url("./assets/img/textura2.png") no-reapeat center center fixed;
+ion-card-content{
+    --background: url("./assets/img/textura2.png") no-reapeat center center fixed;
 }

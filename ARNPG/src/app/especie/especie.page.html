@@ -11,26 +11,26 @@
 
 
 
-<ion-content padding>
+<ion-content >
   <ion-card *ngIf="item">
     <ion-card-header>
       <ion-card-title>{{ item.nombre }}</ion-card-title>
       <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
     </ion-card-header>
-    <ion-img class="ion-padding-horizontal" src="{{item.imagen}}"></ion-img>
+    <ion-img  src="{{item.imagen}}"></ion-img>
     <ion-card-content>
       <ion-row>
         <ion-col text-center>
-          <ion-img class="ion-padding" src="{{item.uicn}}"></ion-img>
+          <ion-img  src="{{item.uicn}}"></ion-img>
         </ion-col>
         <ion-col text-center>
-          <ion-img class="ion-padding" src="{{item.cites}}"></ion-img>
+          <ion-img  src="{{item.cites}}"></ion-img>
         </ion-col>
         <ion-col text-center>
-          <ion-img class="ion-padding" src="{{item.lea}}"></ion-img>
+          <ion-img  src="{{item.lea}}"></ion-img>
         </ion-col>
         <ion-col text-center>
-          <ion-img class="ion-padding" src="{{item.distEstacional}}"></ion-img>
+          <ion-img  src="{{item.distEstacional}}"></ion-img>
         </ion-col>
       </ion-row>
       <h2>Descripción</h2>

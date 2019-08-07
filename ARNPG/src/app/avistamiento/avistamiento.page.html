@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>avistamiento</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>Avistamiento</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+
+<ion-content>
+  <ion-card *ngIf="item">
+    <ion-card-header>
+      <ion-card-title>{{ item.nombre }}</ion-card-title>
+      <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
+    </ion-card-header>
+    <ion-img  src="{{item.multimedia}}"></ion-img>
+    <ion-card-content>
+      <h2>Comentario</h2>
+      <p>{{item.comentario}}</p>
+      <br>
+      <h2>Fecha</h2>
+      <p>{{item.fecha}}</p>
+      <br>
+      <h2>Lugar</h2>
+      <p>{{item.lugar}}</p>
+      <br>
+      <h2>Geolocalización</h2>
+      <p>{{item.geolocalizacion}}</p>
+      <br>
+      <!-- <ion-button fill="clear" slot="end" [routerLink]="['/actualizar-especie', item.id]">
+        Revisar
+      </ion-button> -->
+    </ion-card-content>
+  </ion-card>
+
+   
 </ion-content>

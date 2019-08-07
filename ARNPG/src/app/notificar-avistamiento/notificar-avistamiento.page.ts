@@ -70,7 +70,7 @@ export class NotificarAvistamientoPage implements OnInit {
           especie: value.especie,
           geolocalizacion: value.geolocalizacion,
           lugar: value.lugar,
-          revisado: 0,
+          revisado: "0",
           multimedia: this.image
         }
         this.crudService.createAvistamiento(data)

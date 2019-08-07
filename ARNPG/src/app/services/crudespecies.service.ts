@@ -54,14 +54,14 @@ export class CrudespeciesService {
 
   createAvistamiento(value){
     return new Promise<any>((resolve, reject) => {
-      this.afs.collection('especies').add({
+      this.afs.collection('avistamientos').add({
         nombre: value.nombre,
         fecha: value.fecha,
         comentario: value.comentario,
         especie: value.especie,
         geolocalizacion: value.geolocalizacion,
         lugar: value.lugar,
-        revisado: value.habitat,
+        revisado: value.revisado,
         multimedia: value.multimedia
       })
       .then(
