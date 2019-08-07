@@ -46,7 +46,7 @@ export class NotificarAvistamientoPage implements OnInit {
     this.image = "./assets/imgs.deafault_image.jpg";
     this.validations_form = this.formBuilder.group({
       nombre: new FormControl('', Validators.required),
-      fecha: new FormControl('', Validators.required),
+      fecha: new FormControl(new Date().toLocaleString(), Validators.required),
       comentario: new FormControl('', Validators.required),
       especie: new FormControl('', Validators.required),
       geolocalizacion: new FormControl('', Validators.required),
