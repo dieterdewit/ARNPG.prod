@@ -43,7 +43,7 @@ export class NotificarAvistamientoPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.image = "./assets/imgs.deafault_image.jpg";
+    this.image = "./assets/icon/image_upload.svg";
     this.validations_form = this.formBuilder.group({
       nombre: new FormControl('', Validators.required),
       fecha: new FormControl(new Date().toLocaleString(), Validators.required),
