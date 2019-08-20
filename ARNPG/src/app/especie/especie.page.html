@@ -18,20 +18,23 @@
       <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
     </ion-card-header>
     <ion-img  src="{{item.imagen}}"></ion-img>
+    
     <ion-card-content>
       <ion-row>
-        <ion-col text-center>
-          <ion-img  src="{{item.uicn}}"></ion-img>
+        <ion-col text-center >
+          <ion-img class="fig" src="./assets/img/scuare.png"></ion-img>
         </ion-col>
-        <ion-col text-center>
-          <ion-img  src="{{item.cites}}"></ion-img>
+        <ion-col text-center >
+          <ion-img class="fig" src="./assets/img/scuare.png"></ion-img>
         </ion-col>
-        <ion-col text-center>
-          <ion-img  src="{{item.lea}}"></ion-img>
+        <ion-col text-center >
+          <ion-img class="fig" src="./assets/img/scuare.png"></ion-img>
         </ion-col>
+        <!--
         <ion-col text-center>
           <ion-img  src="{{item.distEstacional}}"></ion-img>
         </ion-col>
+        -->
       </ion-row>
       <h2>Descripción</h2>
       <p>{{item.descripcion}}</p>
