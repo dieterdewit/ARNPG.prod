@@ -45,7 +45,7 @@ export class IngresarEspeciePage implements OnInit {
     this.image = "./assets/imgs.deafault_image.jpg";
     this.validations_form = this.formBuilder.group({
       familia: new FormControl('', Validators.required),
-      orden: new FormControl('', Validators.required),
+      genero: new FormControl('', Validators.required),
       especie: new FormControl('', Validators.required),
       nombre: new FormControl('', Validators.required),
       cites: new FormControl('', Validators.required),
@@ -70,7 +70,7 @@ export class IngresarEspeciePage implements OnInit {
         this.image=url.toString();
         let data = {
           familia: value.familia,
-          orden: value.orden,
+          genero: value.genero,
           especie: value.especie,
           nombre: value.nombre,
           cites: value.cites,
