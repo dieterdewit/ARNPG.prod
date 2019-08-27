@@ -65,7 +65,7 @@ export class ActualizarEspeciePage implements OnInit {
      
       this.validations_form = this.formBuilder.group({
         familia: new FormControl(this.item.familia, Validators.required),
-        orden: new FormControl(this.item.orden, Validators.required),
+        genero: new FormControl(this.item.genero, Validators.required),
         especie: new FormControl(this.item.especie, Validators.required),
         nombre: new FormControl(this.item.nombre, Validators.required),
         cites: new FormControl(this.item.cites, Validators.required),
@@ -95,7 +95,7 @@ export class ActualizarEspeciePage implements OnInit {
         this.image=url.toString();
         let data = {
           familia: value.familia,
-          orden: value.orden,
+          genero: value.genero,
           especie: value.especie,
           nombre: value.nombre,
           cites: value.cites,

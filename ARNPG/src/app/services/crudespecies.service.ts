@@ -100,7 +100,7 @@ export class CrudespeciesService {
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('especies').add({
         familia: value.familia,
-        orden: value.orden,
+        genero: value.genero,
         especie: value.especie,
         nombre: value.nombre,
         cites: value.cites,
