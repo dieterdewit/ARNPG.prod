@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 // Servicios
 import { CrudespeciesService } from '../services/crudespecies.service';
@@ -15,12 +15,37 @@ import 'firebase/storage';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { storage } from 'firebase';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+
+declare var google;
+
 @Component({
   selector: 'app-notificar-avistamiento',
   templateUrl: './notificar-avistamiento.page.html',
   styleUrls: ['./notificar-avistamiento.page.scss'],
 })
 export class NotificarAvistamientoPage implements OnInit {
+
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+  address:string;
+  coords:string;
+
+  geoLatitude: number;
+  geoLongitude: number;
+  geoAccuracy:number;
+  geoAddress: string;
+ 
+  watchLocationUpdates:any; 
+  loading:any;
+  isWatching:boolean;
+ 
+  //Geocoder configuration
+  geoencoderOptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  };
 
   userEmail: string;
 
@@ -39,7 +64,9 @@ export class NotificarAvistamientoPage implements OnInit {
     private navCtrl: NavController,
     private crudService: CrudespeciesService,
     private authService: AuthenticateService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder
     ) { }
 
   ngOnInit() {
@@ -49,12 +76,63 @@ export class NotificarAvistamientoPage implements OnInit {
       fecha: new FormControl(new Date().toLocaleString(), Validators.required),
       comentario: new FormControl('', Validators.required),
       especie: new FormControl('', Validators.required),
-      geolocalizacion: new FormControl('', Validators.required),
       lugar: new FormControl('', Validators.required),
     });
+    this.loadMap();
   }
-
-
+ 
+  loadMap() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+ 
+      this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
+ 
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+ 
+      this.map.addListener('tilesloaded', () => {
+        console.log('accuracy',this.map);
+        this.validations_form.setValue
+        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
+        this.coords = "Lat: " + this.map.center.lat() + " Long: " + this.map.center.lng();
+      });
+ 
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+ 
+  getAddressFromCoords(lattitude, longitude) {
+    console.log("getAddressFromCoords "+lattitude+" "+longitude);
+    let options: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 5
+    };
+ 
+    this.nativeGeocoder.reverseGeocode(lattitude, longitude, options)
+      .then((result: NativeGeocoderResult[]) => {
+        this.address = "";
+        let responseAddress = [];
+        for (let [key, value] of Object.entries(result[0])) {
+          if(value.length>0)
+          responseAddress.push(value);
+ 
+        }
+        responseAddress.reverse();
+        for (let value of responseAddress) {
+          this.address += value+", ";
+        }
+        this.address = this.address.slice(0, -2);
+      })
+      .catch((error: any) =>{ 
+        this.address = "Dirección no disponible.";
+      });
+ 
+  }
 
   onSubmit(value){
     let image_src = this.image;
@@ -68,7 +146,7 @@ export class NotificarAvistamientoPage implements OnInit {
           fecha: value.fecha,
           comentario: value.comentario,
           especie: value.especie,
-          geolocalizacion: value.geolocalizacion,
+          geolocalizacion: this.coords,
           lugar: value.lugar,
           revisado: "0",
           multimedia: this.image
