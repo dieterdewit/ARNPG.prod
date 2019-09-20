@@ -82,26 +82,26 @@ export class MapaAvistamientosPage implements OnInit {
       });
     }
 
-    let citymap = {
-      chicago: {
+    let areas = {
+      animal1: {
         center: {lat: 14.597809004025407, lng: -90.51151901834389},
         population: 4000
       },
-      newyork: {
+      animal2: {
         center: {lat: 14.200009004025407, lng: -90.41151901834389},
         population: 5000
       },
-      losangeles: {
+      animal3: {
         center: {lat: 14.300009004025407, lng: -90.01151901834389},
         population: 8000
       },
-      vancouver: {
+      animal4: {
         center: {lat: 14.800009004025407, lng: -90.71151901834389},
         population: 10000
       }
     };
 
-    for (var city in citymap) {
+    for (var area in areas) {
       // Add the circle for this city to the map.
       var cityCircle = new google.maps.Circle({
         strokeColor: '#FF0000',
@@ -110,8 +110,8 @@ export class MapaAvistamientosPage implements OnInit {
         fillColor: '#FF0000',
         fillOpacity: 0.35,
         map: this.map,
-        center: citymap[city].center,
-        radius: Math.sqrt(citymap[city].population) * 100
+        center: areas[area].center,
+        radius: Math.sqrt(areas[area].population) * 100
       });
     }
   }
