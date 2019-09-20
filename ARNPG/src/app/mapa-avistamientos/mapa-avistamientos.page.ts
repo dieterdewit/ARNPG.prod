@@ -35,7 +35,7 @@ export class MapaAvistamientosPage implements OnInit {
       let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let mapOptions = {
         center: latLng,
-        zoom: 15,
+        zoom: 8,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
 
@@ -60,29 +60,38 @@ export class MapaAvistamientosPage implements OnInit {
     let areas = {
       animal1: {
         center: {lat: 14.597809004025407, lng: -90.51151901834389},
-        radius: 20
+        radius: 2
       },
       animal2: {
         center: {lat: 14.200009004025407, lng: -90.41151901834389},
-        radius: 15
+        radius: 2
       },
       animal3: {
         center: {lat: 14.300009004025407, lng: -90.01151901834389},
-        radius: 25
+        radius: 2
       },
       animal4: {
         center: {lat: 14.800009004025407, lng: -90.71151901834389},
-        radius: 30
+        radius: 2
       }
     };
 
     for (var area in areas) {
       // Add the circle for this city to the map.
-      var cityCircle = new google.maps.Circle({
-        strokeColor: '#FF0000',
+
+      let randomColor = '#FF0000'
+      let iconURL = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+      if(Math.random()> 0.7){
+        randomColor = '#FFFF00'
+        iconURL = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+      }
+
+      let cityCircle = new google.maps.Circle({
+        //strokeColor: '#FF0000',
+        strokeColor: randomColor,
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: '#FF0000',
+        fillColor: randomColor,
         fillOpacity: 0.35,
         map: this.map,
         center: areas[area].center,
@@ -105,6 +114,7 @@ export class MapaAvistamientosPage implements OnInit {
       let marker = new google.maps.Marker({
         position: new google.maps.LatLng(areas[area].center.lat, areas[area].center.lng),
         map: this.map,
+        icon: iconURL,
         title: 'Hello World!'
       });
 
