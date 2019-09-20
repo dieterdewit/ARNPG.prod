@@ -57,47 +57,22 @@ export class MapaAvistamientosPage implements OnInit {
   }
 
   setMarkers(latLng){
-    for(let i=0; i < 5; i++){
-      var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Ocelote</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Avistamiento</b>, vi un gran ocelote. Se llama Otis. ' +
-      '</div>'+
-      '</div>';
-
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-
-      let marker = new google.maps.Marker({
-        position: new google.maps.LatLng(14.597809004025407 + (0.01*i), -90.51151901834389 + (0.005*i)),
-        map: this.map,
-        title: 'Hello World!'
-      });
-
-      marker.addListener('click', function() {
-        infowindow.open(this.map, marker);
-      });
-    }
-
     let areas = {
       animal1: {
         center: {lat: 14.597809004025407, lng: -90.51151901834389},
-        population: 4000
+        radius: 20
       },
       animal2: {
         center: {lat: 14.200009004025407, lng: -90.41151901834389},
-        population: 5000
+        radius: 15
       },
       animal3: {
         center: {lat: 14.300009004025407, lng: -90.01151901834389},
-        population: 8000
+        radius: 25
       },
       animal4: {
         center: {lat: 14.800009004025407, lng: -90.71151901834389},
-        population: 10000
+        radius: 30
       }
     };
 
@@ -111,7 +86,30 @@ export class MapaAvistamientosPage implements OnInit {
         fillOpacity: 0.35,
         map: this.map,
         center: areas[area].center,
-        radius: Math.sqrt(areas[area].population) * 100
+        radius: areas[area].radius * 1000
+      });
+
+      var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Ocelotes</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Avistamientos:</b> 24<br>Son salvajes, proceder con cuidado.' +
+      '</div>'+
+      '</div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      let marker = new google.maps.Marker({
+        position: new google.maps.LatLng(areas[area].center.lat, areas[area].center.lng),
+        map: this.map,
+        title: 'Hello World!'
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(this.map, marker);
       });
     }
   }
