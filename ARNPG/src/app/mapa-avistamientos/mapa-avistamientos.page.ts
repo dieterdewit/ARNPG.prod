@@ -57,28 +57,63 @@ export class MapaAvistamientosPage implements OnInit {
   }
 
   setMarkers(latLng){
-    var contentString = '<div id="content">'+
-    '<div id="siteNotice">'+
-    '</div>'+
-    '<h1 id="firstHeading" class="firstHeading">Ocelote</h1>'+
-    '<div id="bodyContent">'+
-    '<p><b>Avistamiento</b>, vi un gran ocelote. Se llama Otis. ' +
-    '</div>'+
-    '</div>';
+    for(let i=0; i < 5; i++){
+      var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h1 id="firstHeading" class="firstHeading">Ocelote</h1>'+
+      '<div id="bodyContent">'+
+      '<p><b>Avistamiento</b>, vi un gran ocelote. Se llama Otis. ' +
+      '</div>'+
+      '</div>';
 
-    var infowindow = new google.maps.InfoWindow({
-      content: contentString
-    });
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
 
-    let marker = new google.maps.Marker({
-      position: latLng,
-      map: this.map,
-      title: 'Hello World!'
-    });
+      let marker = new google.maps.Marker({
+        position: new google.maps.LatLng(14.597809004025407 + (0.01*i), -90.51151901834389 + (0.005*i)),
+        map: this.map,
+        title: 'Hello World!'
+      });
 
-    marker.addListener('click', function() {
-      infowindow.open(this.map, marker);
-    });
+      marker.addListener('click', function() {
+        infowindow.open(this.map, marker);
+      });
+    }
+
+    let citymap = {
+      chicago: {
+        center: {lat: 14.597809004025407, lng: -90.51151901834389},
+        population: 4000
+      },
+      newyork: {
+        center: {lat: 14.200009004025407, lng: -90.41151901834389},
+        population: 5000
+      },
+      losangeles: {
+        center: {lat: 14.300009004025407, lng: -90.01151901834389},
+        population: 8000
+      },
+      vancouver: {
+        center: {lat: 14.800009004025407, lng: -90.71151901834389},
+        population: 10000
+      }
+    };
+
+    for (var city in citymap) {
+      // Add the circle for this city to the map.
+      var cityCircle = new google.maps.Circle({
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#FF0000',
+        fillOpacity: 0.35,
+        map: this.map,
+        center: citymap[city].center,
+        radius: Math.sqrt(citymap[city].population) * 100
+      });
+    }
   }
  
   getAddressFromCoords(lattitude, longitude) {
