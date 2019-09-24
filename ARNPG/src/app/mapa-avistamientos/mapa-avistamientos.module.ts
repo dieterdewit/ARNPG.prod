@@ -6,11 +6,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { MapaAvistamientosPage } from './mapa-avistamientos.page';
+import { MapaAvistamientosResolver} from "./mapa-avistamientos.resolver";
 
 const routes: Routes = [
   {
     path: '',
-    component: MapaAvistamientosPage
+    component: MapaAvistamientosPage,
+    resolve: {
+      data: MapaAvistamientosResolver
+    }
   }
 ];
 
@@ -21,6 +25,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [MapaAvistamientosPage]
+  declarations: [MapaAvistamientosPage],
+  providers: [
+    MapaAvistamientosResolver
+  ]
 })
 export class MapaAvistamientosPageModule {}

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ActivatedRoute } from '@angular/router';
 
 declare var google;
 
@@ -21,16 +23,41 @@ export class MapaAvistamientosPage implements OnInit {
   geoAccuracy:number;
   geoAddress: string;
 
+  items: Array<any>;
+  allItems: Array<any>;
+
+  public goalList: any[];
+  public loadedGoalList: any[];
+
   constructor(
     private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder
+    private nativeGeocoder: NativeGeocoder,
+    private firestore: AngularFirestore,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.loadMap();
+    this.firestore.collection(`avistamientos`).valueChanges().subscribe(goalList => {
+      this.goalList = goalList;
+      this.loadedGoalList = goalList;
+      });
+      if (this.route && this.route.data){
+        this.getData();
+      }
+  }
+
+  async getData(){
+    this.route.data.subscribe(routeData => {
+      routeData['data'].subscribe(data => {
+        this.items = data;
+        this.allItems = this.items.slice(0);
+        this.loadMap();
+      })
+    })
   }
 
   loadMap() {
+    alert(this.allItems);
     this.geolocation.getCurrentPosition().then((resp) => {
       let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
       let mapOptions = {
@@ -49,14 +76,14 @@ export class MapaAvistamientosPage implements OnInit {
         this.coords = "Lat: " + this.map.center.lat() + " Long: " + this.map.center.lng();
       });
 
-      this.setMarkers(latLng);
+      this.setMarkers();
  
     }).catch((error) => {
       console.log('Error getting location', error);
     });
   }
 
-  setMarkers(latLng){
+  setMarkers(){
     let areas = {
       animal1: {
         center: {lat: 14.597809004025407, lng: -90.51151901834389},
