@@ -90,6 +90,7 @@ export class ActualizarEspeciePage implements OnInit {
     let image_src = this.image;
     let randomId = Math.random().toString(36).substr(2, 5);
     //uploads img to firebase storage
+    if (this.fileToUp!=null){
     this.storage.upload(randomId, this.fileToUp).then(rst => {
       rst.ref.getDownloadURL().then(url => {
         this.image=url.toString();
@@ -116,6 +117,30 @@ export class ActualizarEspeciePage implements OnInit {
         )
       })
     });
+  }else{
+    this.image=this.item.imagen;
+    let data = {
+      familia: value.familia,
+      orden: value.orden,
+      especie: value.especie,
+      nombre: value.nombre,
+      cites: value.cites,
+      lea: value.lea,
+      uicn: value.uicn,
+      distEstacional: value.distEstacional,
+      descripcion: value.descripcion,
+      ecologia: value.ecologia,
+      habitat: value.habitat,
+      distribucion: value.distribucion,
+      imagen: this.image
+    }
+    this.crudService.updateEspecie(this.item.id,data)
+    .then(
+      res => {
+        this.router.navigate(["/dashboard"]);
+      }
+    )
+  }
   }
 
   async delete() {
