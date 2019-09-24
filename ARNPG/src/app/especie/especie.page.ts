@@ -21,6 +21,12 @@ export class EspeciePage implements OnInit {
   item: any;
   load: boolean = false;
 
+  sliderConfig = {
+    slidesPerView: 1.6,
+    spaceBetween: 10,
+    centeredSlides: true
+  };
+  
   constructor(
     public crudService: CrudespeciesService,
     private route: ActivatedRoute,

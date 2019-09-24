@@ -18,6 +18,11 @@
       <ion-card-subtitle><i>{{item.especie}}</i></ion-card-subtitle>
     </ion-card-header>
     <ion-img class="ion-padding-horizontal" src="{{item.imagen}}"></ion-img>
+    <ion-slides [options]="sliderConfig">
+    <ion-slide *ngFor="let link of item.imagenes">
+      <img src="{{link}}">
+    </ion-slide>
+    </ion-slides>
     <ion-card-content>
       <ion-row>
         <ion-col text-center>

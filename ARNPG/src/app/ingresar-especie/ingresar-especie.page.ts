@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ViewChild } from '@angular/core';
 
 // Servicios
 import { CrudespeciesService } from '../services/crudespecies.service';
@@ -13,7 +14,10 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from "@ionic-native/file/ngx";
 import 'firebase/storage';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { storage } from 'firebase';
+import { MultiFileUploadComponent } from '../components/multi-file-upload/multi-file-upload.component';
+
 @Component({
   selector: 'app-ingresar-especie',
   templateUrl: './ingresar-especie.page.html',
@@ -26,6 +30,9 @@ export class IngresarEspeciePage implements OnInit {
   validations_form: FormGroup;
   image: any;
   fileToUp:File;
+  imagenes: Array<any>;
+  imagenesFile:Array<File>;
+
 
 
   constructor(
@@ -81,7 +88,8 @@ export class IngresarEspeciePage implements OnInit {
           ecologia: value.ecologia,
           habitat: value.habitat,
           distribucion: value.distribucion,
-          imagen: this.image
+          imagen: this.image,
+          imagenes: this.imagenes
         }
         this.crudService.createEspecie(data)
         .then(
@@ -95,7 +103,13 @@ export class IngresarEspeciePage implements OnInit {
   }
 
   
-
+  async uploadImageUnique(ID,fileToUp){
+    this.storage.upload(ID, fileToUp).then(rst => {
+      rst.ref.getDownloadURL().then(url=>{
+        this.imagenes.push(url.toString);
+      })
+    })
+  }
   uploadImageToFirebase(){
     console.log("Inicio de subida de imagen");
     let image_src = this.image;
@@ -137,11 +151,21 @@ export class IngresarEspeciePage implements OnInit {
   }
 
   onFileSelected(event){
+    this.imagenesFile=new Array<File>();
+    this.imagenes=new Array<any>();
+    for (let a of event.target.files)
+    {
+      var reader = new FileReader();
+      this.imagenesFile.push(a);
+      reader.onload=e=>this.imagenes.push(String(reader.result));
+      reader.readAsDataURL(a);
+    }    
     var Imagefile=event.target.files[0];
     var reader = new FileReader();
     this.fileToUp=Imagefile;
     reader.onload = e => this.image = String(reader.result);
     reader.readAsDataURL(Imagefile);
+    location.reload();
   }
 
 }

@@ -18,8 +18,17 @@
     </ion-row>
     <ion-row>
       <ion-col size="6" offset="3">
-        <ion-input type="file" accept=".jpg,.jpeg,.png" (change)="onFileSelected($event)"></ion-input>
+        <ion-input type="file" accept=".jpg,.jpeg,.png" (change)="onFileSelected($event)" multiple></ion-input>
       </ion-col>
+    </ion-row>
+  </div>
+  <div>
+    <ion-row>
+      <ion-slides [options]="sliderConfig">
+        <ion-slide *ngFor="let link of imagesSelected">
+          <img src="{{link}}">
+        </ion-slide>
+        </ion-slides>
     </ion-row>
   </div>
 
