@@ -44,53 +44,53 @@ export class EspeciePage implements OnInit {
       this.item = data;
 
       if(this.item.lea == "1"){
-        this.item.lea = "./assets/icon/1_G.png"
+        this.item.lea = "1"
       }else if(this.item.lea == "2"){
-        this.item.lea = "./assets/icon/2_G.png"
+        this.item.lea = "2"
       }else if(this.item.lea == "3"){
-        this.item.lea = "./assets/icon/3_G.png"
+        this.item.lea = "3"
       }else if (this.item.lea == "X"){
-        this.item.lea = "./assets/icon/X_G.png"
+        this.item.lea = "X"
       }else{
-        this.item.lea = "./assets/icon/-_G.png"
+        this.item.lea = "-"
       }
 
       if(this.item.cites == "I"){
-        this.item.cites = "./assets/icon/I_Y.png"
+        this.item.cites = "I"
       }else if(this.item.cites == "II"){
-        this.item.cites = "./assets/icon/II_Y.png"
+        this.item.cites = "II"
       }else if(this.item.cites == "III"){
-        this.item.cites = "./assets/icon/III_Y.png"
+        this.item.cites = "III"
       }else if (this.item.cites == "X"){
-        this.item.cites = "./assets/icon/X_Y.png"
+        this.item.cites = "X"
       }else{
-        this.item.cites = "./assets/icon/-_Y.png"
+        this.item.cites = "-"
       }
 
       if(this.item.uicn == "LC"){
-        this.item.uicn = "./assets/icon/LC.png"
+        this.item.uicn = "LC"
       }else if(this.item.uicn == "VU"){
-        this.item.uicn = "./assets/icon/VU.png"
+        this.item.uicn = "VU"
       }else if(this.item.uicn == "EN"){
-        this.item.uicn = "./assets/icon/EN.png"
+        this.item.uicn = "EN"
       }else if (this.item.uicn == "CR"){
-        this.item.uicn = "./assets/icon/CR.png"
+        this.item.uicn = "CR"
       }else if (this.item.uicn == "DD"){
-        this.item.uicn = "./assets/icon/DD.png"
+        this.item.uicn = "DD"
       }else{
-        this.item.uicn = "./assets/icon/-_R.png"
+        this.item.uicn = "-"
       }
 
       if(this.item.distEstacional == "R"){
-        this.item.distEstacional = "./assets/icon/R.png"
+        this.item.distEstacional = "R"
       }else if(this.item.distEstacional == "M"){
-        this.item.distEstacional = "./assets/icon/M.png"
+        this.item.distEstacional = "M"
       }else if(this.item.distEstacional == "T"){
-        this.item.distEstacional = "./assets/icon/T.png"
+        this.item.distEstacional = "T"
       }else if (this.item.distEstacional == "ER"){
-        this.item.distEstacional = "./assets/icon/ER.png"
+        this.item.distEstacional = "ER"
       }else{
-        this.item.distEstacional = "./assets/icon/-_P.png"
+        this.item.distEstacional = "-"
       }
     }
     else{
