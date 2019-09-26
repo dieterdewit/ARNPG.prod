@@ -36,6 +36,11 @@ export class AppComponent {
       icon: 'images'
     },
     {
+      title: 'Mapa Avistamientos',
+      url: '/mapa-avistamientos',
+      icon: 'map'
+    },
+    {
       title: 'Iniciar sesión',
       url: '/login',
       icon: 'log-in'

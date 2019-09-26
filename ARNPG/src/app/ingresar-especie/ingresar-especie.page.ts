@@ -91,6 +91,7 @@ export class IngresarEspeciePage implements OnInit {
         )
       })
     })
+    this.ngOnInit()
 
   }
 

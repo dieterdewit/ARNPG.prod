@@ -1,24 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
 
-import { ActualizarEspeciePage } from './actualizar-especie.page';
+import { MapaAvistamientosPage } from './mapa-avistamientos.page';
 
-describe('ActualizarEspeciePage', () => {
-  let component: ActualizarEspeciePage;
-  let fixture: ComponentFixture<ActualizarEspeciePage>;
+describe('MapaAvistamientosPage', () => {
+  let component: MapaAvistamientosPage;
+  let fixture: ComponentFixture<MapaAvistamientosPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActualizarEspeciePage ],
-      imports: [ReactiveFormsModule],
+      declarations: [ MapaAvistamientosPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActualizarEspeciePage);
+    fixture = TestBed.createComponent(MapaAvistamientosPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

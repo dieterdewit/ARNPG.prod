@@ -13,7 +13,7 @@
     <div>
       <ion-row no padding>
         <ion-col size="6" offset="3">
-          <img [src]="image" alt="No hay imagen seleccionada"/>
+          <img [src]="image" alt="No hay imagen seleccionada" style="max-width:50%;"/>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -41,18 +41,34 @@
         <ion-input type="text" formControlName="especie"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating" color="primary">Geolocalización</ion-label>
-        <ion-input type="text" formControlName="geolocalizacion"></ion-input>
+        <ion-label position="floating" color="primary">Coordenadas</ion-label>
+        <ion-input type="text" value="{{coords}}"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating" color="primary">Lugar</ion-label>
-        <ion-input type="text" formControlName="lugar"></ion-input>
+        <ion-input type="text" formControlName="lugar" value="{{address}}"></ion-input>
       </ion-item>
-  
+
+      <ion-row>
+        <ion-col text-start padding-top>
+          <ion-title>Mapa</ion-title>
+        </ion-col>
+        <ion-col text-end>
+          <ion-button (click)="loadMap()" shape="round" fill="outline">
+            <ion-icon slot="start" name="locate"></ion-icon>
+            Obtener ubicación actual
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <div class="map-wrapper">
+        <div id="map_center">
+          <img src="./assets/icon/map_marker.png" />
+        </div>
+        <div #map id="map"></div>
+      </div>
+
       <ion-button expand="block" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Notificar Avistamiento</ion-button>
-  
-      
+        
     </form>
-  
   </ion-card>
   </ion-content>

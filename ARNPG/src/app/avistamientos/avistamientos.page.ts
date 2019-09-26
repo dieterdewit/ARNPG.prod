@@ -4,7 +4,7 @@ import { NavController, ModalController, IonSearchbar } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-avistamientos',

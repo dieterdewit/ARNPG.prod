@@ -22,6 +22,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -44,6 +47,8 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
     AuthenticateService,
     ImagePicker,
     WebView,
+    Geolocation,
+    NativeGeocoder,
     { provide: FirestoreSettingsToken, useValue: {}},
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

@@ -76,6 +76,14 @@ export class CatalogoPage implements OnInit {
       routeData['data'].subscribe(data => {
         this.items = data;
         this.allItems = this.items.slice(0);
+
+        var arrayson = [];
+        for (let item of this.items) {
+          //item.payload.doc.data().nombre
+          arrayson.push(item.payload.doc.data().nombre)
+        }
+        arrayson.sort() 
+        console.log(arrayson)
       })
     })
   }
