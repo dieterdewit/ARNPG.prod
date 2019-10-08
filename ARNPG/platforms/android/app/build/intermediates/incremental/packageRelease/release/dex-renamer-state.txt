@@ -1,0 +1,4 @@
+#Tue Oct 08 17:43:47 CST 2019
+base.0=/home/kamiryu/Documents/Universidad/Ingenieria_de_Software2/ARNPG.prod/ARNPG/platforms/android/app/build/intermediates/transforms/dex/release/0
+path.0=classes.dex
+renamed.0=classes.dex
