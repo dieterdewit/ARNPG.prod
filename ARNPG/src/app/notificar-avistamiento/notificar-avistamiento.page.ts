@@ -16,7 +16,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { storage } from 'firebase';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 
 declare var google;
 
@@ -29,18 +29,19 @@ export class NotificarAvistamientoPage implements OnInit {
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  address:string;
-  coords:string;
+  address: string;
+  latitude: string;
+  longitude: string;
 
   geoLatitude: number;
   geoLongitude: number;
-  geoAccuracy:number;
+  geoAccuracy: number;
   geoAddress: string;
- 
-  watchLocationUpdates:any; 
-  loading:any;
-  isWatching:boolean;
- 
+
+  watchLocationUpdates: any;
+  loading: any;
+  isWatching: boolean;
+
   //Geocoder configuration
   geoencoderOptions: NativeGeocoderOptions = {
     useLocale: true,
@@ -51,12 +52,12 @@ export class NotificarAvistamientoPage implements OnInit {
 
   validations_form: FormGroup;
   image: any;
-  fileToUp:File;
+  fileToUp: File;
 
 
   constructor(
     private imagePicker: ImagePicker,
-    public toastCtrl:ToastController,
+    public toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
     public router: Router,
     private formBuilder: FormBuilder,
@@ -67,7 +68,7 @@ export class NotificarAvistamientoPage implements OnInit {
     private storage: AngularFireStorage,
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.image = "./assets/icon/image_upload.svg";
@@ -80,7 +81,7 @@ export class NotificarAvistamientoPage implements OnInit {
     });
     this.loadMap();
   }
- 
+
   loadMap() {
     this.geolocation.getCurrentPosition().then((resp) => {
       let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
@@ -89,88 +90,90 @@ export class NotificarAvistamientoPage implements OnInit {
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
- 
+
       this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
- 
+
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
- 
+
       this.map.addListener('tilesloaded', () => {
-        console.log('accuracy',this.map);
+        console.log('accuracy', this.map);
         this.validations_form.setValue
         this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
-        this.coords = "Lat: " + this.map.center.lat() + " Long: " + this.map.center.lng();
+        this.latitude = this.map.center.lat();
+        this.longitude = this.map.center.lng();
       });
- 
+
     }).catch((error) => {
       console.log('Error getting location', error);
     });
   }
- 
+
   getAddressFromCoords(lattitude, longitude) {
-    console.log("getAddressFromCoords "+lattitude+" "+longitude);
+    console.log("getAddressFromCoords " + lattitude + " " + longitude);
     let options: NativeGeocoderOptions = {
       useLocale: true,
       maxResults: 5
     };
- 
+
     this.nativeGeocoder.reverseGeocode(lattitude, longitude, options)
       .then((result: NativeGeocoderResult[]) => {
         this.address = "";
         let responseAddress = [];
         for (let [key, value] of Object.entries(result[0])) {
-          if(value.length>0)
-          responseAddress.push(value);
- 
+          if (value.length > 0)
+            responseAddress.push(value);
+
         }
         responseAddress.reverse();
         for (let value of responseAddress) {
-          this.address += value+", ";
+          this.address += value + ", ";
         }
         this.address = this.address.slice(0, -2);
       })
-      .catch((error: any) =>{ 
+      .catch((error: any) => {
         this.address = "Dirección no disponible.";
       });
- 
+
   }
 
-  onSubmit(value){
+  onSubmit(value) {
     let image_src = this.image;
     let randomId = Math.random().toString(36).substr(2, 5);
     //uploads img to firebase storage
     this.storage.upload(randomId, this.fileToUp).then(rst => {
       rst.ref.getDownloadURL().then(url => {
-        this.image=url.toString();
+        this.image = url.toString();
         let data = {
           nombre: value.nombre,
           fecha: value.fecha,
           comentario: value.comentario,
           especie: value.especie,
-          geolocalizacion: this.coords,
+          latitude: this.latitude,
+          longitude: this.longitude,
           lugar: value.lugar,
           revisado: "0",
           multimedia: this.image
         }
         this.crudService.createAvistamiento(data)
-        .then(
-          res => {
-            this.router.navigate(["/dashboard"]);
-          }
-        )
+          .then(
+            res => {
+              this.router.navigate(["/dashboard"]);
+            }
+          )
       })
     })
 
   }
 
-  uploadImageToFirebase(){
+  uploadImageToFirebase() {
     console.log("Inicio de subida de imagen");
     let image_src = this.image;
     let randomId = Math.random().toString(36).substr(2, 5);
-    console.log(randomId);  
+    console.log(randomId);
     //uploads img to firebase storage
     this.storage.upload(randomId, this.fileToUp).then(rst => {
       rst.ref.getDownloadURL().then(url => {
-        this.image=url.toString();
+        this.image = url.toString();
         console.log("URL");
         console.log(url);
         console.log("This Image");
@@ -191,21 +194,20 @@ export class NotificarAvistamientoPage implements OnInit {
   async presentLoading(loading) {
     return await loading.present();
   }
-  async wait() {  
-  console.log("Beforep: " + new Date().toString());
+  async wait() {
+    console.log("Beforep: " + new Date().toString());
     // Sleep thread for 3 seconds
-  await this.delay(3000);
-  console.log("Afterp:  " + new Date().toString());
+    await this.delay(3000);
+    console.log("Afterp:  " + new Date().toString());
   }
-  private delay(ms: number)
-  {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  onFileSelected(event){
-    var Imagefile=event.target.files[0];
+  onFileSelected(event) {
+    var Imagefile = event.target.files[0];
     var reader = new FileReader();
-    this.fileToUp=Imagefile;
+    this.fileToUp = Imagefile;
     reader.onload = e => this.image = String(reader.result);
     reader.readAsDataURL(Imagefile);
   }

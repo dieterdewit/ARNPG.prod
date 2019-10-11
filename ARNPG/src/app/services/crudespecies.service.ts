@@ -16,87 +16,88 @@ export class CrudespeciesService {
     public afs: AngularFirestore
   ) { }
 
-  getEspecies(){
+  getEspecies() {
     return new Promise<any>((resolve, reject) => {
       this.snapshotChangesSubscription = this.afs.collection('especies').snapshotChanges();
       resolve(this.snapshotChangesSubscription);
     })
   }
 
-  getEspecie(especieId){
+  getEspecie(especieId) {
     return new Promise<any>((resolve, reject) => {
       this.snapshotChangesSubscription = this.afs.collection('especies').doc(especieId).valueChanges()
-      .subscribe(snapshots => {
-        resolve(snapshots);
-      }, err => {
-        reject(err)
-      })
+        .subscribe(snapshots => {
+          resolve(snapshots);
+        }, err => {
+          reject(err)
+        })
     });
   }
 
-  getAvistamientos(){
+  getAvistamientos() {
     return new Promise<any>((resolve, reject) => {
       this.snapshotChangesSubscription = this.afs.collection('avistamientos').snapshotChanges();
       resolve(this.snapshotChangesSubscription);
     })
   }
 
-  getAvistamiento(avistamientoId){
+  getAvistamiento(avistamientoId) {
     return new Promise<any>((resolve, reject) => {
       this.snapshotChangesSubscription = this.afs.collection('avistamientos').doc(avistamientoId).valueChanges()
-      .subscribe(snapshots => {
-        resolve(snapshots);
-      }, err => {
-        reject(err)
-      })
+        .subscribe(snapshots => {
+          resolve(snapshots);
+        }, err => {
+          reject(err)
+        })
     });
   }
 
-  createAvistamiento(value){
+  createAvistamiento(value) {
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('avistamientos').add({
         nombre: value.nombre,
         fecha: value.fecha,
         comentario: value.comentario,
         especie: value.especie,
-        geolocalizacion: value.geolocalizacion,
+        latitude: value.latitude,
+        longitude: value.longitude,
         lugar: value.lugar,
         revisado: value.revisado,
         multimedia: value.multimedia
       })
-      .then(
-        res => resolve(res),
-        err => reject(err)
-      )
+        .then(
+          res => resolve(res),
+          err => reject(err)
+        )
     })
   }
 
-  unsubscribeOnLogOut(){
+  unsubscribeOnLogOut() {
     //remember to unsubscribe from the snapshotChanges
     this.snapshotChangesSubscription.unsubscribe();
   }
 
-  updateEspecie(especieId, value){
+  updateEspecie(especieId, value) {
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('especies').doc(especieId).set(value)
-      .then(
-        res => resolve(res),
-        err => reject(err)
-      )
+        .then(
+          res => resolve(res),
+          err => reject(err)
+        )
     })
   }
 
-  deleteEspecie(especieId){
+  deleteEspecie(especieId) {
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('especies').doc(especieId).delete()
-      .then(
-        res => resolve(res),
-        err => reject(err)
-      )
+        .then(
+          res => resolve(res),
+          err => reject(err)
+        )
     })
   }
 
-  createEspecie(value){
+  createEspecie(value) {
     return new Promise<any>((resolve, reject) => {
       this.afs.collection('especies').add({
         familia: value.familia,
@@ -113,10 +114,10 @@ export class CrudespeciesService {
         distribucion: value.distribucion,
         imagen: value.imagen
       })
-      .then(
-        res => resolve(res),
-        err => reject(err)
-      )
+        .then(
+          res => resolve(res),
+          err => reject(err)
+        )
     })
   }
 
@@ -126,7 +127,7 @@ export class CrudespeciesService {
     var ctx = c.getContext("2d");
     var img = new Image();
     img.onload = function () {
-      var aux:any = this;
+      var aux: any = this;
       c.width = aux.width;
       c.height = aux.height;
       ctx.drawImage(img, 0, 0);
@@ -137,18 +138,18 @@ export class CrudespeciesService {
   };
 
 
-  uploadImage(imageURI, randomId){
+  uploadImage(imageURI, randomId) {
     return new Promise<any>((resolve, reject) => {
       let storageRef = firebase.storage().ref();
       let imageRef = storageRef.child(randomId);
-      this.encodeImageUri(imageURI, function(image64){
+      this.encodeImageUri(imageURI, function (image64) {
         imageRef.putString(image64, 'data_url')
-        .then(snapshot => {
-          snapshot.ref.getDownloadURL()
-          .then(res => resolve(res))
-        }, err => {
-          reject(err);
-        })
+          .then(snapshot => {
+            snapshot.ref.getDownloadURL()
+              .then(res => resolve(res))
+          }, err => {
+            reject(err);
+          })
       })
     })
   }
