@@ -6,6 +6,12 @@ import { ActivatedRoute } from '@angular/router';
 
 import { CrudespeciesService } from '../services/crudespecies.service';
 
+import 'ol/ol.css';
+import { Map, View } from 'ol';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
+
+
 declare var google;
 
 @Component({
@@ -49,28 +55,17 @@ export class MapaAvistamientosPage implements OnInit {
   }
 
   loadMap() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-      let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-      let mapOptions = {
-        center: latLng,
-        zoom: 8,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-
-      this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
-
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-      this.map.addListener('tilesloaded', () => {
-        console.log('accuracy', this.map);
-        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
-        this.coords = "Lat: " + this.map.center.lat() + " Long: " + this.map.center.lng();
-      });
-
-      this.setMarkers();
-
-    }).catch((error) => {
-      console.log('Error getting location', error);
+    const map = new Map({
+      target: 'map',
+      layers: [
+        new TileLayer({
+          source: new OSM()
+        })
+      ],
+      view: new View({
+        center: [0, 0],
+        zoom: 0
+      })
     });
   }
 
