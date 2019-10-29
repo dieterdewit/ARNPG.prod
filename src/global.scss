@@ -11,6 +11,7 @@
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
 @import url('https://fonts.googleapis.com/css?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Arimo&display=swap');
 
 ion-toolbar{
     --background: rgb(99, 188, 72);
@@ -24,7 +25,6 @@ ion-toolbar > ion-title{
     color: white;
 }
 
-h1 {
-    
+* {
+    font-family: 'Arimo', sans-serif;
 }
-
