@@ -7,9 +7,18 @@ import { ActivatedRoute } from '@angular/router';
 import { CrudespeciesService } from '../services/crudespecies.service';
 
 import 'ol/ol.css';
-import { Map, View } from 'ol';
-import TileLayer from 'ol/layer/Tile';
+import Feature from 'ol/Feature';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import Point from 'ol/geom/Point';
+import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
+import { fromLonLat } from 'ol/proj';
+import TileJSON from 'ol/source/TileJSON';
+import VectorSource from 'ol/source/Vector';
+import { Icon, Style } from 'ol/style';
 import OSM from 'ol/source/OSM';
+import { defaults as defaultControls, FullScreen } from 'ol/control';
+import { defaults as defaultInteractions, DragRotateAndZoom } from 'ol/interaction';
 
 
 declare var google;
@@ -55,16 +64,74 @@ export class MapaAvistamientosPage implements OnInit {
   }
 
   loadMap() {
-    const map = new Map({
-      target: 'map',
-      layers: [
-        new TileLayer({
-          source: new OSM()
-        })
-      ],
+    var rome = new Feature({
+      geometry: new Point(fromLonLat([-90.51151901834389, 14.597809004025407]))
+    });
+
+    var london = new Feature({
+      geometry: new Point(fromLonLat([-90.411519018343895, 14.200009004025407]))
+    });
+
+    var madrid = new Feature({
+      geometry: new Point(fromLonLat([-90.01151901834389, 14.300009004025407]))
+    });
+
+    rome.setStyle(new Style({
+      image: new Icon({
+        color: '#FFFFFF',
+        crossOrigin: 'anonymous',
+        src: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+      })
+    }));
+
+    london.setStyle(new Style({
+      image: new Icon({
+        color: '#FFFFFF',
+        crossOrigin: 'anonymous',
+        src: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+      })
+    }));
+
+    madrid.setStyle(new Style({
+      image: new Icon({
+        color: '#FFFFFF',
+        crossOrigin: 'anonymous',
+        src: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+      })
+    }));
+
+
+    var vectorSource = new VectorSource({
+      features: [rome, london, madrid]
+    });
+
+    var vectorLayer = new VectorLayer({
+      source: vectorSource
+    });
+
+    var rasterLayer = new TileLayer({
+      source: new TileJSON({
+        url: 'https://a.tiles.mapbox.com/v3/aj.1x1-degrees.json',
+        crossOrigin: ''
+      })
+    });
+
+    var simpleLayer = new TileLayer({
+      source: new OSM()
+    })
+
+    var map = new Map({
+      layers: [simpleLayer, vectorLayer],
+      target: document.getElementById('map'),
+      controls: defaultControls().extend([
+        new FullScreen()
+      ]),
+      interactions: defaultInteractions().extend([
+        new DragRotateAndZoom()
+      ]),
       view: new View({
-        center: [0, 0],
-        zoom: 0
+        center: fromLonLat([-90.51151901834389, 14.597809004025407]),
+        zoom: 8
       })
     });
   }
