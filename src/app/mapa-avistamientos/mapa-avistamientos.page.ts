@@ -20,9 +20,6 @@ import OSM from 'ol/source/OSM';
 import { defaults as defaultControls, FullScreen } from 'ol/control';
 import { defaults as defaultInteractions, DragRotateAndZoom } from 'ol/interaction';
 
-
-declare var google;
-
 @Component({
   selector: 'app-mapa-avistamientos',
   templateUrl: './mapa-avistamientos.page.html',
@@ -64,61 +61,42 @@ export class MapaAvistamientosPage implements OnInit {
   }
 
   loadMap() {
-    var rome = new Feature({
-      geometry: new Point(fromLonLat([-90.51151901834389, 14.597809004025407]))
-    });
+    this.setMarkers();
+  }
 
-    var london = new Feature({
-      geometry: new Point(fromLonLat([-90.411519018343895, 14.200009004025407]))
-    });
+  setMarkers() {
+    let markers = [];
 
-    var madrid = new Feature({
-      geometry: new Point(fromLonLat([-90.01151901834389, 14.300009004025407]))
-    });
+    for (let item of this.items) {
+      console.log(item.longitude);
+      if (!item.longitude) {
+        continue;
+      }
+      var marker = new Feature({
+        geometry: new Point(fromLonLat([item.longitude, item.latitude]))
+      });
 
-    rome.setStyle(new Style({
-      image: new Icon({
-        color: '#FFFFFF',
-        crossOrigin: 'anonymous',
-        src: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-      })
-    }));
+      marker.setStyle(new Style({
+        image: new Icon({
+          color: '#FFFFFF',
+          crossOrigin: 'anonymous',
+          src: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+        })
+      }));
+      markers.push(marker);
+    }
 
-    london.setStyle(new Style({
-      image: new Icon({
-        color: '#FFFFFF',
-        crossOrigin: 'anonymous',
-        src: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-      })
-    }));
-
-    madrid.setStyle(new Style({
-      image: new Icon({
-        color: '#FFFFFF',
-        crossOrigin: 'anonymous',
-        src: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-      })
-    }));
-
+    var simpleLayer = new TileLayer({
+      source: new OSM()
+    })
 
     var vectorSource = new VectorSource({
-      features: [rome, london, madrid]
+      features: markers
     });
 
     var vectorLayer = new VectorLayer({
       source: vectorSource
     });
-
-    var rasterLayer = new TileLayer({
-      source: new TileJSON({
-        url: 'https://a.tiles.mapbox.com/v3/aj.1x1-degrees.json',
-        crossOrigin: ''
-      })
-    });
-
-    var simpleLayer = new TileLayer({
-      source: new OSM()
-    })
 
     var map = new Map({
       layers: [simpleLayer, vectorLayer],
@@ -134,58 +112,9 @@ export class MapaAvistamientosPage implements OnInit {
         zoom: 8
       })
     });
-  }
-
-  setMarkers() {
-    let markers = [
-      {
-        center: { lat: 14.597809004025407, lng: -90.51151901834389 },
-        radius: 2
-      },
-      {
-        center: { lat: 14.200009004025407, lng: -90.41151901834389 },
-        radius: 2
-      },
-      {
-        center: { lat: 14.300009004025407, lng: -90.01151901834389 },
-        radius: 2
-      },
-      {
-        center: { lat: 14.800009004025407, lng: -90.71151901834389 },
-        radius: 2
-      }
-    ];
-
-    for (let item of this.items) {
-      let avistamiento = {
-        nombre: item.nombre,
-        center: { lat: item.latitude, lng: item.longitude },
-        radius: 2
-      };
-      markers.push(avistamiento);
-    }
 
     for (let m of markers) {
       // Add the circle for this city to the map.
-
-      let randomColor = '#FF0000'
-      let iconURL = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
-      if (Math.random() > 0.7) {
-        randomColor = '#FFFF00'
-        iconURL = 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
-      }
-
-      let cityCircle = new google.maps.Circle({
-        //strokeColor: '#FF0000',
-        strokeColor: randomColor,
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        fillColor: randomColor,
-        fillOpacity: 0.35,
-        map: this.map,
-        center: m.center,
-        radius: m.radius * 1000
-      });
 
       var contentString = '<div id="content">' +
         '<div id="siteNotice">' +
@@ -195,21 +124,6 @@ export class MapaAvistamientosPage implements OnInit {
         '<p><b>Avistamientos:</b> 24<br>Son salvajes, proceder con cuidado.' +
         '</div>' +
         '</div>';
-
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-
-      let marker = new google.maps.Marker({
-        position: new google.maps.LatLng(m.center.lat, m.center.lng),
-        map: this.map,
-        icon: iconURL,
-        title: 'Hello World!'
-      });
-
-      marker.addListener('click', function () {
-        infowindow.open(this.map, marker);
-      });
     }
   }
 
@@ -227,7 +141,6 @@ export class MapaAvistamientosPage implements OnInit {
         for (let [key, value] of Object.entries(result[0])) {
           if (value.length > 0)
             responseAddress.push(value);
-
         }
         responseAddress.reverse();
         for (let value of responseAddress) {

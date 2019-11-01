@@ -18,6 +18,22 @@ import { storage } from 'firebase';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 
+import 'ol/ol.css';
+import Feature from 'ol/Feature';
+import Map from 'ol/Map';
+import View from 'ol/View';
+import Point from 'ol/geom/Point';
+import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
+import { fromLonLat } from 'ol/proj';
+import TileJSON from 'ol/source/TileJSON';
+import VectorSource from 'ol/source/Vector';
+import { Icon, Style } from 'ol/style';
+import OSM from 'ol/source/OSM';
+import { defaults as defaultControls, FullScreen } from 'ol/control';
+import { defaults as defaultInteractions, DragRotateAndZoom } from 'ol/interaction';
+import { get as getProjection } from 'ol/proj';
+import { transform } from 'ol/proj';
+
 declare var google;
 
 @Component({
@@ -84,23 +100,35 @@ export class NotificarAvistamientoPage implements OnInit {
 
   loadMap() {
     this.geolocation.getCurrentPosition().then((resp) => {
-      let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-      let mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
 
-      this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
+      var simpleLayer = new TileLayer({
+        source: new OSM()
+      })
 
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      var map = new Map({
+        layers: [simpleLayer],
+        target: document.getElementById('map'),
+        controls: defaultControls().extend([
+          new FullScreen()
+        ]),
+        interactions: defaultInteractions().extend([
+          new DragRotateAndZoom()
+        ]),
+        view: new View({
+          projection: 'EPSG:4326',
+          center: fromLonLat([resp.coords.longitude, resp.coords.latitude]),
+          zoom: 12
+        })
+      });
 
-      this.map.addListener('tilesloaded', () => {
-        console.log('accuracy', this.map);
-        this.validations_form.setValue
-        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
-        this.latitude = this.map.center.lat();
-        this.longitude = this.map.center.lng();
+      //this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
+
+      map.on("moveend", function (e) {
+        //this.validations_form.setValue
+        //this.getAddressFromCoords(this.map.view.getCenter()[0], this.map.view.getCenter()[1])
+        console.log(map.getView().getCenter()[0]);
+        this.latitude = map.getView().getCenter()[0];
+        this.longitude = map.getView().getCenter()[1];
       });
 
     }).catch((error) => {

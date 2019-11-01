@@ -1,9 +1,8 @@
-
 <ion-header>
-  <ion-toolbar >
-      <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Notificar avistamiento</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,7 +12,7 @@
     <div>
       <ion-row no padding>
         <ion-col size="6" offset="3">
-          <img [src]="image" alt="No hay imagen seleccionada" style="max-width:50%;"/>
+          <img [src]="image" alt="No hay imagen seleccionada" style="max-width:50%;" />
         </ion-col>
       </ion-row>
       <ion-row>
@@ -22,7 +21,7 @@
         </ion-col>
       </ion-row>
     </div>
-  
+
     <form class="form" [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
       <ion-item>
         <ion-label position="floating" color="primary">Nombre</ion-label>
@@ -61,14 +60,12 @@
         </ion-col>
       </ion-row>
       <div class="map-wrapper">
-        <div id="map_center">
-          <img src="./assets/icon/map_marker.png" />
-        </div>
-        <div #map id="map"></div>
+        <div id="map"></div>
       </div>
 
-      <ion-button expand="block" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Notificar Avistamiento</ion-button>
-        
+      <ion-button expand="block" class="submit-btn" type="submit" [disabled]="!validations_form.valid">Notificar
+        Avistamiento</ion-button>
+
     </form>
   </ion-card>
-  </ion-content>
+</ion-content>
