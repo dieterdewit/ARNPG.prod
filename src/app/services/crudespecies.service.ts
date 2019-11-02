@@ -61,7 +61,6 @@ export class CrudespeciesService {
         especie: value.especie,
         latitude: value.latitude,
         longitude: value.longitude,
-        lugar: value.lugar,
         revisado: value.revisado,
         multimedia: value.multimedia
       })

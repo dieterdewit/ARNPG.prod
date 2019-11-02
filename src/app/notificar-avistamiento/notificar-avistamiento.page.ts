@@ -24,15 +24,13 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import Point from 'ol/geom/Point';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
-import { fromLonLat } from 'ol/proj';
+import { fromLonLat, toLonLat } from 'ol/proj';
 import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
 import { Icon, Style } from 'ol/style';
 import OSM from 'ol/source/OSM';
 import { defaults as defaultControls, FullScreen } from 'ol/control';
 import { defaults as defaultInteractions, DragRotateAndZoom } from 'ol/interaction';
-import { get as getProjection } from 'ol/proj';
-import { transform } from 'ol/proj';
 
 declare var google;
 
@@ -46,8 +44,6 @@ export class NotificarAvistamientoPage implements OnInit {
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   address: string;
-  latitude: string;
-  longitude: string;
 
   geoLatitude: number;
   geoLongitude: number;
@@ -57,6 +53,8 @@ export class NotificarAvistamientoPage implements OnInit {
   watchLocationUpdates: any;
   loading: any;
   isWatching: boolean;
+  latitude: string;
+  longitude: string;
 
   //Geocoder configuration
   geoencoderOptions: NativeGeocoderOptions = {
@@ -93,7 +91,8 @@ export class NotificarAvistamientoPage implements OnInit {
       fecha: new FormControl(new Date().toLocaleString(), Validators.required),
       comentario: new FormControl('', Validators.required),
       especie: new FormControl('', Validators.required),
-      lugar: new FormControl('', Validators.required),
+      latitude: new FormControl(this.latitude, Validators.required),
+      longitude: new FormControl(this.latitude, Validators.required)
     });
     this.loadMap();
   }
@@ -115,9 +114,8 @@ export class NotificarAvistamientoPage implements OnInit {
           new DragRotateAndZoom()
         ]),
         view: new View({
-          projection: 'EPSG:4326',
           center: fromLonLat([resp.coords.longitude, resp.coords.latitude]),
-          zoom: 12
+          zoom: 15
         })
       });
 
@@ -126,9 +124,9 @@ export class NotificarAvistamientoPage implements OnInit {
       map.on("moveend", function (e) {
         //this.validations_form.setValue
         //this.getAddressFromCoords(this.map.view.getCenter()[0], this.map.view.getCenter()[1])
-        console.log(map.getView().getCenter()[0]);
-        this.latitude = map.getView().getCenter()[0];
-        this.longitude = map.getView().getCenter()[1];
+        console.log(toLonLat(map.getView().getCenter())[0]);
+        this.latitude = toLonLat(map.getView().getCenter())[0];
+        this.longitude = toLonLat(map.getView().getCenter())[1];
       });
 
     }).catch((error) => {
@@ -165,12 +163,12 @@ export class NotificarAvistamientoPage implements OnInit {
   }
 
   onSubmit(value) {
-    let image_src = this.image;
     let randomId = Math.random().toString(36).substr(2, 5);
     //uploads img to firebase storage
     this.storage.upload(randomId, this.fileToUp).then(rst => {
       rst.ref.getDownloadURL().then(url => {
         this.image = url.toString();
+        console.log(this.latitude)
         let data = {
           nombre: value.nombre,
           fecha: value.fecha,
@@ -178,7 +176,6 @@ export class NotificarAvistamientoPage implements OnInit {
           especie: value.especie,
           latitude: this.latitude,
           longitude: this.longitude,
-          lugar: value.lugar,
           revisado: "0",
           multimedia: this.image
         }
