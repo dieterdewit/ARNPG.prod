@@ -62,6 +62,7 @@ export class IngresarEspeciePage implements OnInit {
 
 
   onSubmit(value){
+    if(this.fileToUp!=null){
     let image_src = this.image;
     let randomId = Math.random().toString(36).substr(2, 5);
     //uploads img to firebase storage
@@ -92,7 +93,9 @@ export class IngresarEspeciePage implements OnInit {
       })
     })
     this.ngOnInit()
-
+  }else{
+    alert("Debe seleccionar una imagen para ingresar especie.")
+  }
   }
 
   
