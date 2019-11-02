@@ -53,8 +53,8 @@ export class NotificarAvistamientoPage implements OnInit {
   watchLocationUpdates: any;
   loading: any;
   isWatching: boolean;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 
   //Geocoder configuration
   geoencoderOptions: NativeGeocoderOptions = {
@@ -86,13 +86,13 @@ export class NotificarAvistamientoPage implements OnInit {
 
   ngOnInit() {
     this.image = "./assets/icon/image_upload.svg";
+    this.latitude = 0;
+    this.longitude = 0;
     this.validations_form = this.formBuilder.group({
       nombre: new FormControl('', Validators.required),
       fecha: new FormControl(new Date().toLocaleString(), Validators.required),
       comentario: new FormControl('', Validators.required),
       especie: new FormControl('', Validators.required),
-      latitude: new FormControl(this.latitude, Validators.required),
-      longitude: new FormControl(this.latitude, Validators.required)
     });
     this.loadMap();
   }
@@ -121,12 +121,12 @@ export class NotificarAvistamientoPage implements OnInit {
 
       //this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
 
-      map.on("moveend", function (e) {
+      map.on("moveend", (e) => {
         //this.validations_form.setValue
         //this.getAddressFromCoords(this.map.view.getCenter()[0], this.map.view.getCenter()[1])
         console.log(toLonLat(map.getView().getCenter())[0]);
-        this.latitude = toLonLat(map.getView().getCenter())[0];
-        this.longitude = toLonLat(map.getView().getCenter())[1];
+        this.latitude = toLonLat(map.getView().getCenter())[1];
+        this.longitude = toLonLat(map.getView().getCenter())[0];
       });
 
     }).catch((error) => {

@@ -68,10 +68,6 @@ export class MapaAvistamientosPage implements OnInit {
     let markers = [];
 
     for (let item of this.items) {
-      console.log(item.longitude);
-      if (!item.longitude) {
-        continue;
-      }
       var marker = new Feature({
         geometry: new Point(fromLonLat([item.longitude, item.latitude]))
       });
@@ -85,6 +81,8 @@ export class MapaAvistamientosPage implements OnInit {
       }));
       markers.push(marker);
     }
+
+    console.log(markers)
 
     var simpleLayer = new TileLayer({
       source: new OSM()
