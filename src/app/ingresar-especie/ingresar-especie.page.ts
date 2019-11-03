@@ -40,7 +40,7 @@ export class IngresarEspeciePage implements OnInit {
     private authService: AuthenticateService,
     private storage: AngularFireStorage
     ) { }
-
+  //Funcion para cuando se inicializa la aplicacion
   ngOnInit() {
     this.image = "./assets/imgs.deafault_image.jpg";
     this.validations_form = this.formBuilder.group({
