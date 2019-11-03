@@ -60,7 +60,7 @@ export class IngresarEspeciePage implements OnInit {
   }
 
 
-
+  //funcion para cuando se presiona el boton de subir
   onSubmit(value){
     if(this.fileToUp!=null){
     let image_src = this.image;
