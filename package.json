@@ -39,7 +39,7 @@
     "cordova-plugin-nativegeocoder": "^3.2.2",
     "core-js": "^2.5.4",
     "firebase": "^5.10.1",
-    "ol": "^6.1.0",
+    "ol": "^6.1.1",
     "rxjs": "~6.4.0",
     "selenium-webdriver": "^4.0.0-alpha.5",
     "source-map": "^0.7.3",

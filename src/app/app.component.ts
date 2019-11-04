@@ -21,7 +21,7 @@ export class AppComponent {
       icon: 'add-circle'
     },
     {
-      title: 'Notificar Avistamiento',
+      title: 'Notificar avistamiento',
       url: '/notificar-avistamiento',
       icon: 'camera'
     },
@@ -31,7 +31,7 @@ export class AppComponent {
       icon: 'images'
     },
     {
-      title: 'Mapa Avistamientos',
+      title: 'Mapa avistamientos',
       url: '/mapa-avistamientos',
       icon: 'map'
     },
@@ -41,7 +41,7 @@ export class AppComponent {
       icon: 'log-in'
     },
     {
-      title: 'Sobre Nosotros',
+      title: 'Sobre nosotros',
       url: '/dashboard',
       icon: 'information'
     }
