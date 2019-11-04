@@ -6,10 +6,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 
+import { SortPipe } from './Sort';
+
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.page.html',
   styleUrls: ['./catalogo.page.scss'],
+  // pipes: [SortPipe]
 })
 export class CatalogoPage implements OnInit {
 
