@@ -32,6 +32,11 @@ export class EspeciePage implements OnInit {
     
   }
 
+  myFunction() {
+    //console.log("entro");
+    const popup: HTMLElement = document.getElementById("myPopup").classList.toggle("show");
+    //popup
+  }
   getData(){
     this.route.data.subscribe(routeData => {
      let data = routeData['data'];

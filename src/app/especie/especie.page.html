@@ -46,8 +46,9 @@
           </ion-button>
           </ion-col>
 
-          <ion-col text-center >
-          <ion-button class="ion-color bot3 ios button button-solid ion-activatable ion-focusable hydrated" color="#E91C23">
+          <ion-col text-center class="popup" (click)="myFunction()">
+          <span class="popuptext" id="myPopup">A Simple Popup!</span>
+          <ion-button class="ion-color bot3 ios button button-solid ion-activatable ion-focusable hydrated" color="#E91C23" >
               {{item.uicn}}
           </ion-button>  
           </ion-col>
