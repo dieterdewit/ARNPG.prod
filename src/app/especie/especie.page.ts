@@ -41,12 +41,48 @@ export class EspeciePage implements OnInit {
     let popup: boolean;
     if(num == 1){
       popup = document.getElementById("myPopup1").classList.toggle("show");
+      if(document.getElementById("myPopup2").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup2").classList.toggle("show");
+      }
+      if(document.getElementById("myPopup3").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup3").classList.toggle("show");
+      }
+      if(document.getElementById("myPopup4").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup4").classList.toggle("show");
+      }
     }else if(num == 2){
       popup= document.getElementById("myPopup2").classList.toggle("show");
+      if(document.getElementById("myPopup1").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup1").classList.toggle("show");
+      }
+      if(document.getElementById("myPopup3").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup3").classList.toggle("show");
+      }
+      if(document.getElementById("myPopup4").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup4").classList.toggle("show");
+      }
     }else if(num == 3){
       popup= document.getElementById("myPopup3").classList.toggle("show");
+      if(document.getElementById("myPopup2").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup2").classList.toggle("show");
+      }
+      if(document.getElementById("myPopup1").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup1").classList.toggle("show");
+      }
+      if(document.getElementById("myPopup4").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup4").classList.toggle("show");
+      }
     }else if(num == 4){
       popup = document.getElementById("myPopup4").classList.toggle("show");
+      if(document.getElementById("myPopup2").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup2").classList.toggle("show");
+      }
+      if(document.getElementById("myPopup3").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup3").classList.toggle("show");
+      }
+      if(document.getElementById("myPopup1").classList.toggle("show") == true){
+        popup= document.getElementById("myPopup1").classList.toggle("show");
+      }
     }
     
     //popup
