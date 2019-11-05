@@ -15,6 +15,7 @@ import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 import { fromLonLat } from 'ol/proj';
 import TileJSON from 'ol/source/TileJSON';
 import VectorSource from 'ol/source/Vector';
+import Overlay from 'ol/Overlay';
 import { Icon, Style } from 'ol/style';
 import OSM from 'ol/source/OSM';
 import { defaults as defaultControls, FullScreen } from 'ol/control';
@@ -69,7 +70,9 @@ export class MapaAvistamientosPage implements OnInit {
 
     for (let item of this.items) {
       var marker = new Feature({
-        geometry: new Point(fromLonLat([item.longitude, item.latitude]))
+        geometry: new Point(fromLonLat([item.longitude, item.latitude])),
+        name: item.nombre,
+        multimedia: item.multimedia
       });
 
       marker.setStyle(new Style({
@@ -96,9 +99,29 @@ export class MapaAvistamientosPage implements OnInit {
       source: vectorSource
     });
 
+
+    var container = document.getElementById('popup');
+    var content = document.getElementById('popup-content');
+    var closer = document.getElementById('popup-closer');
+
+    var overlay = new Overlay({
+      element: container,
+      autoPan: true,
+      autoPanAnimation: {
+        duration: 250
+      }
+    });
+
+    closer.onclick = function () {
+      overlay.setPosition(undefined);
+      closer.blur();
+      return false;
+    };
+
     var map = new Map({
       layers: [simpleLayer, vectorLayer],
       target: document.getElementById('map'),
+      overlays: [overlay],
       controls: defaultControls().extend([
         new FullScreen()
       ]),
@@ -109,6 +132,20 @@ export class MapaAvistamientosPage implements OnInit {
         center: fromLonLat([-90.51151901834389, 14.597809004025407]),
         zoom: 8
       })
+    });
+
+    map.on('singleclick', function (evt) {
+      var coordinate = evt.coordinate;
+      var feature = map.forEachFeatureAtPixel(evt.pixel,
+        function (feature) {
+          return feature;
+        });
+      if (feature) {
+        content.innerHTML = '<p>Nombre: ' + feature.get('name') + '</p><img src="' + feature.get('multimedia') + '"/>';
+        overlay.setPosition(coordinate);
+      } else {
+        overlay.setPosition(undefined);
+      }
     });
 
     for (let m of markers) {

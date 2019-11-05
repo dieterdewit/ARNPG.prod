@@ -14,13 +14,18 @@
         <ion-title>Mapa de Avistamientos</ion-title>
       </ion-col>
       <ion-col text-end>
-      <!--<ion-button class="button-icon" (click)="loadMap()" shape="round" fill="outline">
+        <!--<ion-button class="button-icon" (click)="loadMap()" shape="round" fill="outline">
           <ion-icon class="icon" slot="start" name="locate"></ion-icon>
         </ion-button>-->
       </ion-col>
     </ion-row>
     <div class="map-wrapper">
-      <div id="map"></div>
+      <div id="map">
+      </div>
+      <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+      </div>
     </div>
 
   </ion-card>
