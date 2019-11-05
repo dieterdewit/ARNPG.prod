@@ -103,6 +103,7 @@ export class IngresarEspeciePage implements OnInit {
   uploadImageToFirebase(){
     console.log("Inicio de subida de imagen");
     let image_src = this.image;
+    //generador de id de imagen
     let randomId = Math.random().toString(36).substr(2, 5);
     console.log(randomId);  
     //uploads img to firebase storage
