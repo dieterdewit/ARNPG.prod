@@ -32,9 +32,19 @@ export class EspeciePage implements OnInit {
     
   }
 
-  myFunction() {
+  myFunction(num: Number) {
     //console.log("entro");
-    const popup: HTMLElement = document.getElementById("myPopup").classList.toggle("show");
+    let popup: boolean;
+    if(num == 1){
+      popup = document.getElementById("myPopup1").classList.toggle("show");
+    }else if(num == 2){
+      popup= document.getElementById("myPopup2").classList.toggle("show");
+    }else if(num == 3){
+      popup= document.getElementById("myPopup3").classList.toggle("show");
+    }else if(num == 4){
+      popup = document.getElementById("myPopup4").classList.toggle("show");
+    }
+    
     //popup
   }
   getData(){
@@ -101,7 +111,7 @@ export class EspeciePage implements OnInit {
     else{
       console.log("no data");
     }
-    })
+    });
   }
 
 }
